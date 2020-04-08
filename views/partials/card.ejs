@@ -1,0 +1,32 @@
+<div class="card bg-dark" style="height: 380px;">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <img src="https://cdn.discordapp.com/icons/<%= template.guild %>/<%= template.icon %>.png"
+                     class="card-img" alt="Icon">
+            </div>
+            <div class="col-6 pl-2 my-auto">
+                <h5>
+                    <span class="badge badge-success badge-pill w-100 mb-1" style="font-weight: 500;">
+                        <%= template.usage %> Uses
+                    </span>
+                    <span class="badge badge-info badge-pill w-100 mb-1" style="font-weight: 500;">
+                        <%= template.tag1 == 'nsfw' ? 'NSFW' : template.tag1.charAt(0).toUpperCase() + template.tag1.slice(1); %>
+                    </span>
+                    <% if (template.tag2 != null) { %>
+                        <span class="badge badge-info badge-pill w-100" style="font-weight: 500;">
+                            <%= template.tag2 == 'nsfw' ? 'NSFW' : template.tag2.charAt(0).toUpperCase() + template.tag2.slice(1); %>
+                        </span>
+                    <% } %>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"><%= template.name %></h5>
+        <p class="card-text"><%= template.description %></p>
+    </div>
+    <div class="card-footer text-center">
+        <a href="/templates/<%= template.guild %>" class="btn btn-outline-success">View Template</a>
+    </div>
+</div>

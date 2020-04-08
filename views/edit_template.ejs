@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', {title: 'Edit Template'}) %>
+</head>
+
+<body>
+<div class="main-content">
+    <%- include('partials/navbar', {user: user}) %>
+    <div class="container my-4">
+        <div class="align-items-center mb-4">
+            <h3>Edit Template</h3>
+            <h5>Edit the details of the template.</h5>
+        </div>
+        <div class="card shadow py-2 bg-dark">
+            <div class="card-body">
+                <h5 class="card-title">Your Template</h5>
+                <form class="needs-validation" method="post" action="/templates/<%= template.source_guild_id %>/edit" novalidate>
+                    <div class="form-group">
+                        <label for="template-code" class="col-form-label">Link</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text form-control-darker">https://discord.new/</span>
+                            </div>
+                            <input name="code" type="text" class="form-control form-control-darker" id="template-code"
+                                   value="<%= template.code %>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="template-name" class="col-form-label">Name</label>
+                        <input name="name" type="text" class="form-control form-control-darker" id="template-name"
+                               value="<%= template.name %>" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="template-description" class="col-form-label">Description</label>
+                        <textarea name="description" class="form-control form-control-darker"
+                                  id="template-description" disabled><%= template.description %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="template-tag1" class="col-form-label">First Tag</label>
+                        <select name="tag1" class="form-control form-control-darker" id="template-tag1" required>
+                            <option <%= template.tags[0] === 'community' ? 'selected' : '' %>>Community</option>
+                            <option <%= template.tags[0] === 'gaming' ? 'selected' : '' %>>Gaming</option>
+                            <option <%= template.tags[0] === 'roleplay' ? 'selected' : '' %>>Roleplay</option>
+                            <option <%= template.tags[0] === 'friends' ? 'selected' : '' %>>Friends</option>
+                            <option <%= template.tags[0] === 'art' ? 'selected' : '' %>>Art</option>
+                            <option <%= template.tags[0] === 'anime' ? 'selected' : '' %>>Anime</option>
+                            <option <%= template.tags[0] === 'music' ? 'selected' : '' %>>Music</option>
+                            <option <%= template.tags[0] === 'meme' ? 'selected' : '' %>>Meme</option>
+                            <option <%= template.tags[0] === 'economy' ? 'selected' : '' %>>Economy</option>
+                            <option <%= template.tags[0] === 'coding' ? 'selected' : '' %>>Coding</option>
+                            <option <%= template.tags[0] === 'learning' ? 'selected' : '' %>>Learning</option>
+                            <option <%= template.tags[0] === 'support' ? 'selected' : '' %>>Support</option>
+                            <option <%= template.tags[0] === 'nsfw' ? 'selected' : '' %>>NSFW</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="template-tag2" class="col-form-label">Second Tag (Optional)</label>
+                        <select name="tag2" class="form-control form-control-darker" id="template-tag2" required>
+                            <option <%= template.tags[1] == null ? 'selected' : '' %>>None</option>
+                            <option <%= template.tags[1] === 'community' ? 'selected' : '' %>>Community</option>
+                            <option <%= template.tags[1] === 'gaming' ? 'selected' : '' %>>Gaming</option>
+                            <option <%= template.tags[1] === 'roleplay' ? 'selected' : '' %>>Roleplay</option>
+                            <option <%= template.tags[1] === 'friends' ? 'selected' : '' %>>Friends</option>
+                            <option <%= template.tags[1] === 'art' ? 'selected' : '' %>>Art</option>
+                            <option <%= template.tags[1] === 'anime' ? 'selected' : '' %>>Anime</option>
+                            <option <%= template.tags[1] === 'music' ? 'selected' : '' %>>Music</option>
+                            <option <%= template.tags[1] === 'meme' ? 'selected' : '' %>>Meme</option>
+                            <option <%= template.tags[1] === 'economy' ? 'selected' : '' %>>Economy</option>
+                            <option <%= template.tags[1] === 'coding' ? 'selected' : '' %>>Coding</option>
+                            <option <%= template.tags[1] === 'learning' ? 'selected' : '' %>>Learning</option>
+                            <option <%= template.tags[1] === 'support' ? 'selected' : '' %>>Support</option>
+                            <option <%= template.tags[1] === 'nsfw' ? 'selected' : '' %>>NSFW</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="template-server" class="col-form-label">Do you want to display <span
+                                    class="font-weight-bold"><%= template.serialized_source_guild.name %></span> as
+                            sample?</label>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="template-server-yes" class="custom-control-input"
+                                   name="server" value="true">
+                            <label class="custom-control-label"
+                                   for="template-server-yes">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="template-server-no" class="custom-control-input"
+                                   name="server" value="false" checked>
+                            <label class="custom-control-label" for="template-server-no">No</label>
+                        </div>
+                        <p id="template-server-hint" class="d-none mt-2">
+                            Work in progress...
+                        </p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+</div>
+<%- include('partials/foot') %>
+<script>
+    $('input[type=radio][name=server]').change(function () {
+        console.log('here')
+        if (this.value == 'true') {
+            $('#template-server-hint').removeClass('d-none');
+        } else {
+            $('#template-server-hint').addClass('d-none');
+        }
+    });
+</script>
+</body>
+
+</html>

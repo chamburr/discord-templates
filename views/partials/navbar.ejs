@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container px-4 mw-100">
+        <a href="#" class="navbar-brand h1 mb-0 p-0">
+            <img src="/static/img/icon.png" height="50" width="50" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
+                aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-content" style="font-weight: 500;">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/partners">Partners</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/discord">Discord Server</a>
+                </li>
+                </li>
+            </ul>
+            <% if (locals.user != null) { %>
+                <div class="navbar-nav dropdown">
+                    <a class="dropdown-toggle nav-link no-arrow text-light py-0" data-toggle="dropdown"
+                       aria-expanded="false" href="/users/<%= user.id %>">
+                        <span class="d-none d-sm-inline mr-2"><%= user.username %></span>
+                        <img class="rounded-circle img-profile" height="50" width="50"
+                             src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" role="presentation" href="/users/<%= user.id %>">
+                            <i class="fas fa-user fa-sm fa-fw mr-2"></i>
+                            Profile
+                        </a>
+                        <a class="dropdown-item" role="presentation" href="/templates/new">
+                            <i class="fas fa-plus fa-sm fa-fw mr-2"></i>
+                            Add Template
+                        </a>
+                        <% if (user.admin === true) { %>
+                            <a class="dropdown-item" role="presentation" href="/admin">
+                                <i class="fas fa-chart-pie fa-sm fa-fw mr-2"></i>
+                                Admin Panel
+                            </a>
+                        <% } %>
+                        <a class="dropdown-item" role="presentation" href="/logout">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="navbar-nav dropdown">
+                    <a class="nav-link text-light" href="/login">Login</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</nav>

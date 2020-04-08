@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+<div class="main-content">
+    <%- include('partials/navbar', {user: user}) %>
+    <div class="d-table overflow-hidden w-100" style="height: calc(100vh - 64px);">
+        <div id="particles-js"></div>
+        <div class="d-table-cell align-middle">
+            <div class="container">
+                <h1>Welcome to Discord Templates!</h1>
+                <h5 class="font-weight-normal">Discover a huge variety of Discord server templates for all
+                    purposes.</h5>
+                <form class="form-inline mt-4 needs-validation" method="get" action="/search" novalidate>
+                    <div class="form-group ml-0 mr-3">
+                        <label for="search-name" class="sr-only">Name</label>
+                        <div class="input-group">
+                            <input name="q" type="text" class="form-control form-control-lg form-control-dark"
+                                   id="search-name"
+                                   placeholder="Search for templates..." required>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-dark btn-lg">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="mt-4">
+                    <p class="text-grey font-weight-bold">Or browse by tags...</p>
+                    <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/community">Community</a>
+                    <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/gaming">Gaming</a>
+                    <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/roleplay">Roleplay</a>
+                    <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/friends">Friends</a>
+                    <a role="button" class="btn btn-outline-success btn-sm btn-pill font-weight-bold mb-2"
+                       href="#tag-collapse" data-toggle="collapse" aria-expanded="false"
+                       aria-controls="tag-collapse">Show More</a>
+                    <div class="collapse" id="tag-collapse">
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/art">Art</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/anime">Anime</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/music">Music</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/meme">Meme</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/economy">Economy</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/coding">Coding</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/learning">Learning</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/support">Support</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/nsfw">NSFW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container template-section">
+        <h3><i class="fa fa-star"></i> Top Templates</h3>
+        <p>These templates are the most popular!</p>
+        <div class="row">
+            <% for (let element of top) { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <hr>
+    <div class="container template-section">
+        <h3><i class="fa fa-clock"></i> New Templates</h3>
+        <p>These templates are new to the list!</p>
+        <div class="row">
+            <% for (let element of recent) { %>
+                <% if (!top.find(element2 => element.id == element2.id)) { %>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <%- include('partials/card', {template: element}) %>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+    <hr>
+    <div class="container template-section">
+        <h3><i class="fa fa-users"></i> Community</h3>
+        <p>These templates have the community tag.</p>
+        <div class="row">
+            <% for (let element of community) { %>
+                <% if (!top.find(element2 => element.id == element2.id) && !recent.find(element2 => element.id == element2.id)) { %>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <%- include('partials/card', {template: element}) %>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+        <div class="text-center">
+            <a role="button" class="btn btn-primary" href="/tags/community">View More</a>
+        </div>
+    </div>
+    <hr>
+    <div class="container template-section">
+        <h3><i class="fa fa-gamepad"></i> Gaming</h3>
+        <p>These templates have the gaming tag.</p>
+        <div class="row">
+            <% for (let element of gaming) { %>
+                <% if (!top.find(element2 => element.id == element2.id) && !recent.find(element2 => element.id == element2.id) && !community.find(element2 => element.id == element2.id)) { %>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <%- include('partials/card', {template: element}) %>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+        <div class="text-center">
+            <a role="button" class="btn btn-primary" href="/tags/gaming">View More</a>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+</div>
+<%- include('partials/foot') %>
+<script src="/static/js/particles.min.js"></script>
+<script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 60,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                },
+                "image": {
+                    "src": "img/github.svg",
+                    "width": 100,
+                    "height": 100
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 3,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "window",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "grab"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 200,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+</script>
+</body>
+
+</html>

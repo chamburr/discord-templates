@@ -1,0 +1,21 @@
+{
+  "clientId": "",
+  "clientSecret": "",
+  "botToken": "",
+
+  "baseUri": "",
+  "redirectUri": "",
+
+  "loginHookId": "",
+  "loginHookToken": "",
+  "actionHookId": "",
+  "actionHookToken": "",
+  "auditHookId": "",
+  "auditHookToken": "",
+
+  "jwtToken": "",
+
+  "admin": [],
+
+  "tag": []
+}

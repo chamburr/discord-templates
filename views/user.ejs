@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', {title: profile.username + '#' + profile.discriminator}) %>
+</head>
+
+<body>
+<div class="main-content">
+    <%- include('partials/navbar', {user: user}) %>
+    <div class="container my-4">
+        <div class="align-items-center mb-4">
+            <h3>User Profile</h3>
+        </div>
+        <div class="card shadow py-2 bg-dark">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-md-1"></div>
+                    <div class="col-12 col-md-3 text-center">
+                        <img src="https://cdn.discordapp.com/avatars/<%= profile.id %>/<%= profile.avatar %>.png?size=256"
+                             class="card-img rounded-circle" style="height: 220px; width: 220px;" alt="Avatar">
+                    </div>
+                    <div class="col-12 col-md-7 pl-4 my-auto text-center text-md-left pt-4 pt-md-0">
+                        <h3 class="card-title"><%= profile.username %>#<%= profile.discriminator %></h3>
+                        <h4>
+                            <span class="badge badge-primary font-weight-normal">
+                                <%= templates.length %> templates listed
+                            </span>
+                        </h4>
+                        <h4>
+                            <span class="badge badge-success font-weight-normal">
+                                Templates used <%= templates.map(element => element.usage).reduce((a, b) => a + b) %> times
+                            </span>
+                        </h4>
+                        <p class="card-text">
+                            <em>Joined <%= moment(parseInt(profile.joined)).fromNow() %></em>
+                        </p>
+                    </div>
+                    <div class="col col-md-1"></div>
+                </div>
+            </div>
+        </div>
+        <h4 class="mt-5 mb-4">Templates</h4>
+        <div class="row">
+            <% for (let element of templates) { %>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+</div>
+<%- include('partials/foot') %>
+</body>
+
+</html>

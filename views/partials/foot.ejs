@@ -1,0 +1,31 @@
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script>
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.classList.add('was-validated');
+                }
+            }, false);
+        });
+    }, false);
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            $('#scroll-button').addClass('show');
+        }
+        else {
+            $('#scroll-button').removeClass('show');
+        }
+    });
+    $(document).ready(function () {
+        $('#scroll-button').on('click', function (event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        });
+    });
+    $('[data-toggle="tooltip"]').tooltip();
+</script>
