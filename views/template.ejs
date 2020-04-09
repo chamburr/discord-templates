@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('partials/head', {title: template.name, description: template.description, image: `https://cdn.discordapp.com/icons/${template.source_guild_id}/${template.serialized_source_guild.icon_hash}.png`}) %>
+    <%- include('partials/head', {title: template.name, description: template.description, image: template.serialized_source_guild.icon_hash == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/icons/${template.source_guild_id}/${template.serialized_source_guild.icon_hash}.png`}) %>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col col-lg-1"></div>
                     <div class="col-12 col-lg-3 text-center">
-                        <img src="https://cdn.discordapp.com/icons/<%= template.source_guild_id %>/<%= template.serialized_source_guild.icon_hash %>.png"
+                        <img src="<%= template.serialized_source_guild.icon_hash == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/icons/${template.source_guild_id}/${template.serialized_source_guild.icon_hash}.png` %>"
                              class="card-img rounded-circle" style="height: 220px; width: 220px;" alt="Icon">
                     </div>
                     <div class="col-12 col-lg-7 pl-4 my-auto text-center text-lg-left pt-4 pt-lg-0">

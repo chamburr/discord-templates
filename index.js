@@ -61,6 +61,7 @@ async function updateTemplates() {
             continue;
         }
         if (element.name !== template.name || element.description !== template.description || element.usage !== template.usage_count || element.icon !== template.serialized_source_guild.icon_hash || element.updated !== (new Date(template.updated_at)).getTime().toString()) {
+            if (template.serialized_source_guild.icon_hash == null) template.serialized_source_guild.icon_hash = '';
             db.prepare('UPDATE template SET name=?, description=?, usage=?, icon=?, updated=? WHERE id=?')
                 .run(template.name, template.description, template.usage_count, template.serialized_source_guild.icon_hash, (new Date(template.updated_at)).getTime().toString(), element.id);
         }
@@ -83,6 +84,7 @@ async function updateUsers() {
             continue;
         }
         if (element.username !== user.username || element.avatar !== user.avatar || element.discriminator !== user.discriminator) {
+            if (user.avatar == null) user.avatar == '';
             db.prepare('UPDATE user SET username=?, avatar=?, discriminator=? WHERE id=?')
                 .run(user.username, user.avatar, user.discriminator, element.id);
         }
@@ -184,6 +186,7 @@ app.get('/callback', async (req, res) => {
                 timestamp: Date.now()
             }]
         });
+        if (user.avatar == null) user.avatar == '';
         db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?, ?)')
             .run(user.id, user.username, user.avatar, user.discriminator, Date.now().toString(), 0);
         let token = jwt.signToken(auth.access_token);
@@ -417,6 +420,7 @@ app.post('/templates/new', checkLogin, checkBan, async (req, res) => {
     req.body.tag1 = req.body.tag1.toLowerCase();
     if (req.body.tag2 === 'None') req.body.tag2 = null;
     else req.body.tag2 = req.body.tag2.toLowerCase();
+    if (template.serialized_source_guild.icon_hash == null) template.serialized_source_guild.icon_hash = '';
     db.prepare('INSERT INTO template VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
         .run(template.code, template.name, template.description, template.usage_count, template.creator_id, template.source_guild_id, template.serialized_source_guild.icon_hash, (new Date(template.created_at)).getTime().toString(), (new Date(template.updated_at)).getTime().toString(), req.body.tag1, req.body.tag2, Date.now().toString(), 0);
     return errors.sendCustom(req, res, 'OK', 'Template Submitted', 'While we review your template, we encourage you to join our Discord server for updates.', 'Join Discord', '/discord')
