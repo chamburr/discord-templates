@@ -1,15 +1,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description"
-      content="Discord Templates - Discover a huge variety of Discord server templates for all purposes.">
+      content="<%= locals.description != null ? description : 'Discord Templates - Discover a huge variety of Discord server templates for all purposes.' %>">
 <meta name="author" content="CHamburr#2591">
 <meta name="theme-color" content="#1e90ff">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://discordtemplates.me">
-<meta property="og:site_name" content="Discord Templates">
+<% if (locals.title != null) { %>
+    <meta property="og:site_name" content="Discord Templates">
+<% } %>
+<meta property="og:title" content="<%= locals.title != null ? title : 'Discord Templates' %>">
 <meta property="og:description"
-      content="Discord Templates - Discover a huge variety of Discord server templates for all purposes.">
-<meta property="og:image" content="https://discordtemplate.me/static/img/icon.png">
+      content="<%= locals.description != null ? description : 'Discord Templates - Discover a huge variety of Discord server templates for all purposes.' %>">
+<meta property="og:image"
+      content="<%= locals.image != null ? image : 'https://discordtemplates.me/static/img/icon.png' %>">
 <title><%= locals.title != null ? title + ' | ' : '' %>Discord Templates</title>
 <link rel="icon" href="/static/img/icon.png" type="image/png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -18,9 +22,12 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129600306-4"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
     gtag('config', 'UA-129600306-4');
 </script>
 <style>
@@ -66,6 +73,7 @@
     .form-control-dark::placeholder {
         color: grey;
     }
+
     .form-control-dark:disabled, input.form-control-dark:read-only, textarea.form-control-dark:read-only {
         background-color: #343a40;
         color: grey;
