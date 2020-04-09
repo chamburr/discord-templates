@@ -44,9 +44,8 @@
                         </h4>
                         <p class="card-text mb-1"><%= template.description %></p>
                         <div>
-                            <a role="button" class="btn btn-primary mt-2"
-                               href="/templates/<%= template.source_guild_id %>/use">Use
-                                Template</a>
+                            <a role="button" class="btn btn-primary mt-2" target="_blank"
+                               href="/templates/<%= template.source_guild_id %>/use">Use Template</a>
                             <% if (locals.user != null && (user.admin === true || user.id == template.creator_id)) { %>
                                 <a role="button" class="btn btn-secondary ml-1 mt-2"
                                    href="/templates/<%= template.source_guild_id %>/edit">Edit</a>
