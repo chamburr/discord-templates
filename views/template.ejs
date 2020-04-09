@@ -112,7 +112,7 @@
                                 <% } else if (element.type === 2) { %>
                                     <button type="button" class="btn btn-sm text-white d-block"
                                             data-toggle="tooltip" data-placement="right"
-                                            title="Bitrate: <%= element.bitrate / 1000 %>kbps&#010;User limit: <%= element.user_limit === 0 ? 'Infinity' : element.user_limit %>">
+                                            title="Bitrate: <%= element.bitrate / 1000 %>kbps&#013;&#010;User limit: <%= element.user_limit === 0 ? 'Infinity' : element.user_limit %>">
                                         <svg class="<%= category === true ? ' ml-4' : '' %>" width="24" height="24"
                                              style="color: lightgrey;">
                                             <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
@@ -123,7 +123,7 @@
                                 <% } else { %>
                                     <button type="button" class="btn btn-sm text-white d-block"
                                             data-toggle="tooltip" data-placement="right"
-                                            title="Topic: <%= element.topic != null ? element.topic : 'None' %>&#010;Slowmode: <%= element.rate_limit_per_user === 0 ? 'Off' : element.rate_limit_per_user + ' seconds' %>&#010;NSFW: <%= element.nsfw %>">
+                                            title="Topic: <%= element.topic != null ? element.topic : 'None' %>&#013;&#010;Slowmode: <%= element.rate_limit_per_user === 0 ? 'Off' : element.rate_limit_per_user + ' seconds' %>&#013;&#010;NSFW: <%= element.nsfw %>">
                                         <svg class="<%= category === true ? ' ml-4' : '' %>" width="24" height="24"
                                              style="color: lightgrey;">
                                             <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
@@ -145,9 +145,9 @@
                                 <button type="button" class="btn btn-sm btn-pill text-white py-0 pl-1 pr-2 my-1"
                                         style="border-color: #<%= color %>;" data-toggle="tooltip"
                                         data-placement="right"
-                                        title="Colour: #<%= originalColor %>&#010;Hoisted: <%= element.hoist %>&#010;Mentionable: <%= element.mentionable %>">
+                                        title="Colour: #<%= originalColor %>&#013;&#010;Hoisted: <%= element.hoist %>&#013;&#010;Mentionable: <%= element.mentionable %>">
                                     <div class="d-inline-block"
-                                         style="vertical-align: middle; height: 0.8rem; width: 0.8rem; margin: 2px 0 4px 0; background-color: #<%= color %>;  border-radius: 10px;"></div>
+                                         style="vertical-align: middle; height: 0.8rem; width: 0.8rem; margin: 1px 0 4px 0; background-color: #<%= color %>;  border-radius: 10px;"></div>
                                     <%= element.name %>
                                 </button>
                             <% } %>
