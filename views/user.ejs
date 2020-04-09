@@ -29,7 +29,7 @@
                         </h4>
                         <h4>
                             <span class="badge badge-success font-weight-normal">
-                                Templates used <%= templates.map(element => element.usage).reduce((a, b) => a + b) %> times
+                                Templates used <%= templates.map(element => element.usage).reduce((a, b) => a + b, 0) %> times
                             </span>
                         </h4>
                         <p class="card-text">
