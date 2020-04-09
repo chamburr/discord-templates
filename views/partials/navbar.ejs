@@ -27,12 +27,14 @@
                 <div class="navbar-nav dropdown">
                     <a class="dropdown-toggle nav-link no-arrow text-light py-0" data-toggle="dropdown"
                        aria-expanded="false" href="/users/<%= user.id %>">
-                        <span class="d-none d-lg-inline mr-2"><%= user.username %></span>
+                        <span class="d-none d-lg-inline mr-1"><%= user.username %></span>
+                        <i class="d-none d-lg-inline-block fas fa-caret-down mr-2"></i>
                         <img class="d-none d-lg-inline rounded-circle img-profile" height="50" width="50"
                              src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png">
                         <img class="d-inline d-lg-none rounded-circle img-profile" height="40" width="40"
                              src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png">
-                        <span class="d-inline d-lg-none mr-2"><%= user.username %></span>
+                        <span class="d-inline d-lg-none mx-1"><%= user.username %></span>
+                        <i class="d-inline d-lg-none fas fa-caret-down"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" role="menu">
                         <a class="dropdown-item" role="presentation" href="/users/<%= user.id %>">
