@@ -287,10 +287,7 @@ app.post('/admin/review', checkLogin, checkAdmin, async (req, res) => {
 });
 
 app.get('/robots.txt', async (req, res) => {
-    res.send(`User-agent: *
-Disallow: /login
-Disallow: /logout
-Disallow: /admin`);
+    res.render('robots', {})
 });
 
 app.get('/', async (req, res) => {
