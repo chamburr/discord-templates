@@ -43,6 +43,57 @@ const api = require('./utils/api.js');
 const errors = require('./utils/error_handler.js');
 const jwt = require('./utils/jwt.js');
 
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function updateTemplates() {
+    let templates = db.prepare('SELECT * FROM template').all();
+    for (let element of templates) {
+        let template = await api.fetchTemplate(element.id);
+        if (template === false) {
+            db.prepare('DELETE FROM template WHERE id=?').run(element.id);
+            await sleep(3000);
+            continue;
+        }
+        if (template == null) {
+            await sleep(3000);
+            continue;
+        }
+        if (element.name !== template.name || element.description !== template.description || element.usage !== template.usage_count || element.icon !== template.serialized_source_guild.icon_hash || element.updated !== (new Date(template.updated_at)).getTime().toString()) {
+            db.prepare('UPDATE template SET name=?, description=?, usage=?, icon=?, updated=? WHERE id=?')
+                .run(template.name, template.description, template.usage_count, template.serialized_source_guild.icon_hash, (new Date(template.updated_at)).getTime().toString(), element.id);
+        }
+        await sleep(3000);
+    }
+    updateTemplates();
+}
+
+async function updateUsers() {
+    let users = db.prepare('SELECT * FROM user').all();
+    for (let element of users) {
+        let user = await api.fetchUser(element.id);
+        if (user === false) {
+            db.prepare('DELETE FROM user WHERE id=?').run(element.id);
+            await sleep(3000);
+            continue;
+        }
+        if (user.username == null) {
+            await sleep(3000);
+            continue;
+        }
+        if (element.username !== user.username || element.avatar !== user.avatar || element.discriminator !== user.discriminator) {
+            db.prepare('UPDATE user SET username=?, avatar=?, discriminator=? WHERE id=?')
+                .run(user.username, user.avatar, user.discriminator, element.id);
+        }
+        await sleep(3000);
+    }
+    updateUsers();
+}
+
+updateTemplates();
+updateUsers();
+
 const oauth = new DiscordOauth2();
 
 async function authUser(req, res, next) {
@@ -257,6 +308,13 @@ app.get('/discord', async (req, res) => {
     res.redirect('https://discord.gg/HXHfYQB');
 });
 
+app.get('/about', async (req, res) => {
+    let data = {
+        user: res.locals.user
+    };
+    res.render('about', data);
+});
+
 app.get('/partners', async (req, res) => {
     let data = {
         user: res.locals.user
@@ -373,6 +431,10 @@ app.get('/templates/:id', checkTemplate, async (req, res) => {
         template: res.locals.template
     };
     res.render('template', data);
+});
+
+app.get('/templates/:id/use', checkTemplate, async (req, res) => {
+    res.redirect('https://discord.new/' + res.locals.template.code);
 });
 
 app.get('/templates/:id/edit', checkLogin, checkTemplate, async (req, res) => {

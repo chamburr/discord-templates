@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', {title: 'About'}) %>
+</head>
+
+<body>
+<div class="main-content">
+    <%- include('partials/navbar', {user: user}) %>
+    <div class="container my-4">
+        <div class="align-items-center mb-4">
+            <h3>About</h3>
+        </div>
+        <p>
+            This website is a Discord server template list that was founded in April 2020, shortly after the release of
+            the server templates functionality. Our goal for this website is to allow users to find and share server
+            templates easily. That said, the templates here are completely created and maintained by the community. Big
+            thanks to everyone!
+        </p>
+        <h4>What are server templates?</h4>
+        <p>
+            Server template is a new Discord feature released just recently in April 2020. It will let you clone
+            categories, channels, roles and permissions to help you set up a new server quickly. For more information on
+            server templates, please check out
+            <a href="https://support.discordapp.com/hc/en-us/articles/360041033511-Server-Templates">this link</a>.
+        </p>
+        <h4>Contributors</h4>
+        <p>
+            These people are most certainly awesome. Without them, Discord Templates would not be possible!
+        </p>
+        <div class="row">
+            <div class="col col-lg-6">
+                <div class="card bg-dark my-2">
+                    <div class="row no-gutters">
+                        <div class="col col-12 col-lg-4 my-4 my-lg-auto px-4 pr-lg-0 text-center">
+                            <img src="https://cdn.discordapp.com/avatars/446290930723717120/80405a7b286dfaa5b64719e9794c203e.png?size=1024"
+                                 class="card-img" alt="Icon" style="max-height: 150px; max-width: 150px;">
+                        </div>
+                        <div class="col col-12 col-lg-8">
+                            <div class="card-body">
+                                <h5 class="card-title">CHamburr</h5>
+                                <p>Developer</p>
+                                <p>Administrator</p>
+                                <a class="btn btn-secondary" href="/users/446290930723717120">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+</div>
+<%- include('partials/foot') %>
+</body>
+
+</html>

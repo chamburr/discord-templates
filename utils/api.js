@@ -18,7 +18,7 @@ async function fetchUser(id) {
         return user;
     } catch (err) {
         if (err.httpStatus === 404) return false;
-        console.log(err);
+        console.log(err.stack);
     }
 }
 
