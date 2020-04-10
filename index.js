@@ -293,8 +293,8 @@ app.post('/admin/review', checkLogin, checkAdmin, async (req, res) => {
 app.get('/', async (req, res) => {
     let data = {
         user: res.locals.user,
-        top: db.prepare('SELECT * FROM template WHERE approved=1 ORDER BY usage DESC LIMIT 20').all(),
-        recent: db.prepare('SELECT * FROM template WHERE approved=1 ORDER BY added LIMIT 8').all(),
+        top: db.prepare('SELECT * FROM template WHERE approved=1 ORDER BY usage DESC LIMIT 15').all(),
+        recent: db.prepare('SELECT * FROM template WHERE approved=1 ORDER BY added DESC LIMIT 12').all(),
         community: db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) AND approved=1 ORDER BY usage DESC LIMIT 12').all('community', 'community'),
         gaming: db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) AND approved=1 ORDER BY usage DESC LIMIT 12').all('gaming', 'gaming'),
     };
