@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const timeout = require('connect-timeout');
+const sitemap = require('express-sitemap');
 const BetterSqlite3 = require('better-sqlite3');
 const Discord = require('discord.js');
 const DiscordOauth2 = require('discord-oauth2');
@@ -289,10 +290,6 @@ app.post('/admin/review', checkLogin, checkAdmin, async (req, res) => {
     res.redirect('/admin');
 });
 
-app.get('/robots.txt', async (req, res) => {
-    res.render('robots', {})
-});
-
 app.get('/', async (req, res) => {
     let data = {
         user: res.locals.user,
@@ -512,6 +509,65 @@ app.get('/users/:id', async (req, res) => {
         templates: db.prepare('SELECT * FROM template WHERE creator=? AND approved=1 ORDER BY usage DESC').all(req.params.id),
     };
     res.render('user', data);
+});
+
+let templates = db.prepare('SELECT guild FROM template').all();
+let users = db.prepare('SELECT id FROM user').all();
+let tags = config.tag;
+
+let map = sitemap({
+    http: 'https',
+    url: 'discordtemplates.me',
+    sitemapSubmission: '/sitemap.xml',
+    generate: app,
+    hideByRegex: [/:id/],
+    route: {
+        '/login': {
+            disallow: true
+        },
+        '/logout': {
+            disallow: true
+        },
+        '/callback': {
+            disallow: true
+        },
+        '/admin': {
+            disallow: true
+        }
+    }
+});
+
+map.map = {
+    ...map.map,
+    ...(() => {
+       let obj = {};
+       tags.forEach(element => {
+           obj['/tags/' + element] = ['get'];
+       });
+       return obj
+    })(),
+    ...(() => {
+        let obj = {};
+        templates.forEach(element => {
+            obj['/templates/' + element.guild] = ['get'];
+        });
+        return obj;
+    })(),
+    ...(() => {
+        let obj = {};
+        users.forEach(element => {
+            obj['/users/' + element.id] = ['get'];
+        });
+        return obj;
+    })()
+};
+
+app.get('/sitemap.xml', async (req, res) => {
+    map.XMLtoWeb(res);
+});
+
+app.get('/robots.txt', async (req, res) => {
+   map.TXTtoWeb(res);
 });
 
 app.use((err, req, res, next) => {
