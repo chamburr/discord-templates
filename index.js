@@ -456,7 +456,7 @@ app.post('/templates/:id/edit', checkLogin, checkTemplate, async (req, res) => {
             fields: [
                 {
                     name: 'Template',
-                    value: `${config.baseUri}/templates/${req.body.code}`,
+                    value: `${config.baseUri}/templates/${req.params.id}`,
                     inline: false
                 },
                 {
