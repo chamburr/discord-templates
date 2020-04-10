@@ -109,11 +109,15 @@
 <%- include('partials/foot') %>
 <script>
     $('input[type=radio][name=server]').change(function () {
-        console.log('here')
         if (this.value == 'true') {
             $('#template-server-hint').removeClass('d-none');
         } else {
             $('#template-server-hint').addClass('d-none');
+        }
+    });
+    $('#template-code').on('input', function () {
+        if (this.value.startsWith('https://discord.new/')) {
+            $(this).val(this.value.substring(20));
         }
     });
 </script>
