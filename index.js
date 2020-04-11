@@ -379,7 +379,7 @@ app.get('/templates/new', checkLogin, checkBan, async (req, res) => {
         data.template = await api.fetchTemplate(req.query.code);
         if (data.template === false) return errors.sendError(req, res, 'Unknown server template.');
         if (data.template == null) return errors.sendError500(req, res);
-        if (data.template.creator_id !== res.locals.user.id) return errors.sendError(req, res, 'You can only add your own template.');
+        if (res.locals.user.admin === false && data.template.creator_id !== res.locals.user.id) return errors.sendError(req, res, 'You can only add your own template.');
         if (db.prepare('SELECT * FROM template WHERE id=?').get(req.query.code) != null) return errors.sendError(req, res, 'This template was already added.');
     }
     res.render('new_template', data);
@@ -394,7 +394,11 @@ app.post('/templates/new', checkLogin, checkBan, async (req, res) => {
     let template = await api.fetchTemplate(req.body.code);
     if (template === false) return errors.sendError(req, res, 'Unknown server template.');
     if (template == null) return errors.sendError500(req, res);
-    if (template.creator_id !== res.locals.user.id) return errors.sendError(req, res, 'You can only add your own template.');
+    if (res.locals.user.admin === true) {
+        db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?, ?)')
+            .run(template.creator.id, template.creator.username, template.creator.avatar, template.creator.discriminator, Date.now().toString(), 0)
+    }
+    else if (template.creator_id !== res.locals.user.id) return errors.sendError(req, res, 'You can only add your own template.');
     await actionHook.send({
         embeds: [{
             title: 'Template Submitted',

@@ -29,7 +29,7 @@
                             <% for (let element of template.tags) { %>
                                 <% if (element != null) { %>
                                     <span class="badge badge-info font-weight-normal mt-2">
-                                        <%= element == 'nsfw' ? 'NSFW' : element.charAt(0).toUpperCase() + element.slice(1) %>
+                                        <%= element.charAt(0).toUpperCase() + element.slice(1) %>
                                     </span>
                                 <% } %>
                             <% } %>

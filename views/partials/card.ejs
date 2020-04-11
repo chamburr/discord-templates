@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-6">
                 <img src="<%= template.icon === '' ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/icons/${template.guild}/${template.icon}.png` %>"
-                     class="card-img" alt="Icon">
+                     class="card-img" alt="Discord Template Icon">
             </div>
             <div class="col-6 pl-2 my-auto">
                 <h5>
@@ -11,11 +11,11 @@
                         <%= template.usage %> Uses
                     </span>
                     <span class="badge badge-info badge-pill w-100 mb-1" style="font-weight: 500;">
-                        <%= template.tag1 == 'nsfw' ? 'NSFW' : template.tag1.charAt(0).toUpperCase() + template.tag1.slice(1); %>
+                        <%= template.tag1.charAt(0).toUpperCase() + template.tag1.slice(1); %>
                     </span>
                     <% if (template.tag2 != null) { %>
                         <span class="badge badge-info badge-pill w-100" style="font-weight: 500;">
-                            <%= template.tag2 == 'nsfw' ? 'NSFW' : template.tag2.charAt(0).toUpperCase() + template.tag2.slice(1); %>
+                            <%= template.tag2.charAt(0).toUpperCase() + template.tag2.slice(1); %>
                         </span>
                     <% } %>
                 </h5>
