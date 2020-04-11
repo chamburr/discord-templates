@@ -546,7 +546,7 @@ map.map = {
     ...(() => {
        let obj = {};
        tags.forEach(element => {
-           obj['/tags/' + element] = ['get'];
+           obj['/tags/' + element.toLowerCase()] = ['get'];
        });
        return obj
     })(),
