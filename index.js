@@ -534,8 +534,13 @@ app.get('/modmail-logs/:id', async (req, res) => {
     if (file === false) return errors.sendError404(req, res);
     let messages = [];
     for (let line of file.split('\n')) {
-        if (line === '') continue;
         line = line.split('#');
+        if (line.length < 2) {
+            if (messages.length > 0) {
+                messages[messages.length - 1] += '\n' + line.join('#');
+            }
+            continue;
+        }
         let partOne = line.shift();
         let partTwo = line.join('#');
         let timestamp = partOne.slice(1, 20);
