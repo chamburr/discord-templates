@@ -537,7 +537,7 @@ app.get('/modmail-logs/:id', async (req, res) => {
         line = line.split('#');
         if (line.length < 2) {
             if (messages.length > 0) {
-                messages[messages.length - 1] += '\n' + line.join('#');
+                messages[messages.length - 1].message += '\n' + line.join('#');
             }
             continue;
         }
