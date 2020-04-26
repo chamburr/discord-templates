@@ -24,7 +24,13 @@
                             <span class="text-muted"><%= element.timestamp %></span>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
-                            <%= element.message %>
+                            <% let messages = element.message.split('\n') %>
+                            <% for (let message of messages) { %>
+                                <%= message %>
+                                <% if (messages.length > 1) { %>
+                                    <br>
+                                <% } %>
+                            <% } %>
                             <% if (element.attachments.length !== 0) { %>
                                 <% let supported = ['.bmp', '.gif', '.jpg', 'jpeg', '.png'] %>
                                 <div class="row mt-2">
