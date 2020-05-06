@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const timeout = require('connect-timeout');
 const sitemap = require('express-sitemap');
+const request = require('request-promise');
 const BetterSqlite3 = require('better-sqlite3');
 const Discord = require('discord.js');
 const DiscordOauth2 = require('discord-oauth2');
@@ -573,6 +574,18 @@ app.get('/modmail-logs/:id', async (req, res) => {
         messages: messages
     };
     res.render('modmail_log', data);
+});
+
+app.get('/modmail-search', async (req, res) => {
+    if (req.query.q == null) return errors.sendError400(req, res);
+    let data = await request({
+        method: 'GET',
+        uri: `https://donatebot.io/panel/guilds/576016832956334080/members?q=${req.query.q}`,
+        json: true
+    });
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.json(data.results);
 });
 
 let templates = db.prepare('SELECT guild FROM template').all();
