@@ -578,9 +578,10 @@ app.get('/modmail-logs/:id', async (req, res) => {
 
 app.get('/modmail-search', async (req, res) => {
     if (req.query.q == null) return errors.sendError400(req, res);
+    let query = encodeURIComponent(req.query.q);
     let data = await request({
         method: 'GET',
-        uri: `https://donatebot.io/panel/guilds/576016832956334080/members?q=${req.query.q}`,
+        uri: `https://donatebot.io/panel/guilds/576016832956334080/members?q=${query}`,
         json: true
     });
     res.header("Access-Control-Allow-Origin", "*");
