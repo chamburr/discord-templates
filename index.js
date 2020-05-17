@@ -401,7 +401,7 @@ app.post('/templates/new', checkLogin, checkBan, async (req, res) => {
     if (template == null) return errors.sendError500(req, res);
     if (res.locals.user.admin === true) {
         db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?, ?)')
-            .run(template.creator.id, template.creator.username, template.creator.avatar, template.creator.discriminator, Date.now().toString(), 0)
+            .run(template.creator.id, template.creator.username, template.creator.avatar, template.creator.discriminator, Date.now().toString(), 0);
     }
     else if (template.creator_id !== res.locals.user.id) return errors.sendError(req, res, 'You can only add your own template.');
     await actionHook.send({
@@ -429,7 +429,7 @@ app.post('/templates/new', checkLogin, checkBan, async (req, res) => {
     if (template.serialized_source_guild.icon_hash == null) template.serialized_source_guild.icon_hash = '';
     db.prepare('INSERT INTO template VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
         .run(template.code, template.name, template.description, template.usage_count, template.creator_id, template.source_guild_id, template.serialized_source_guild.icon_hash, (new Date(template.created_at)).getTime().toString(), (new Date(template.updated_at)).getTime().toString(), req.body.tag1, req.body.tag2, Date.now().toString(), 0);
-    return errors.sendCustom(req, res, 'OK', 'Template Submitted', 'While we review your template, we encourage you to join our Discord server for updates.', 'Join Discord', '/discord')
+    return errors.sendCustom(req, res, 'OK', 'Template Submitted', 'While we review your template, we encourage you to join our Discord server for updates.', 'Join Discord', '/discord');
 });
 
 app.get('/templates/:id', checkTemplate, async (req, res) => {
@@ -569,6 +569,9 @@ app.get('/modmail-logs/:id', async (req, res) => {
             attachments: attachments
         });
     }
+    if (req.query.json) {
+        res.json(messages);
+    }
     let data = {
         user: res.locals.user,
         messages: messages
@@ -584,8 +587,8 @@ app.get('/modmail-search', async (req, res) => {
         uri: `https://donatebot.io/panel/guilds/576016832956334080/members?q=${query}`,
         json: true
     });
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
     res.json(data.results);
 });
 
@@ -645,7 +648,7 @@ app.get('/sitemap.xml', async (req, res) => {
 });
 
 app.get('/robots.txt', async (req, res) => {
-   map.TXTtoWeb(res);
+    map.TXTtoWeb(res);
 });
 
 app.use((err, req, res, next) => {
