@@ -75,25 +75,6 @@
                                 <option>Support</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="template-server" class="col-form-label">Do you want to display <span
-                                        class="font-weight-bold"><%= template.serialized_source_guild.name %></span> as
-                                sample?</label>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="template-server-yes" class="custom-control-input"
-                                       name="server" value="true">
-                                <label class="custom-control-label"
-                                       for="template-server-yes">Yes</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="template-server-no" class="custom-control-input"
-                                       name="server" value="false" checked>
-                                <label class="custom-control-label" for="template-server-no">No</label>
-                            </div>
-                            <p id="template-server-hint" class="d-none mt-2">
-                                Work in progress...
-                            </p>
-                        </div>
                     <% } %>
                     <button type="submit" class="btn btn-primary">
                         <%= locals.template != null ? 'Submit' : 'Next' %>
