@@ -345,8 +345,8 @@ app.get('/search', async (req, res) => {
             if (isNaN(page) || page < 1) return errors.sendError400(req, res);
             page -= 1;
         }
-        templates = db.prepare('SELECT * FROM template WHERE name LIKE ? AND approved=1 ORDER BY LENGTH(name), usage DESC LIMIT 20 OFFSET ?')
-            .all(`%${query}%`, page * 20);
+        templates = db.prepare('SELECT * FROM template WHERE name LIKE ? AND approved=1 ORDER BY LENGTH(name), usage DESC LIMIT 12 OFFSET ?')
+            .all(`%${query}%`, page * 12);
     }
     let data = {
         user: res.locals.user,
@@ -365,8 +365,8 @@ app.get('/tags/:id', async (req, res) => {
         if (isNaN(page) || page < 1) return errors.sendError400(req, res);
         page -= 1;
     }
-    let templates = db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) AND approved=1 ORDER BY usage DESC LIMIT 20 OFFSET ?')
-        .all(req.params.id, req.params.id, page * 20);
+    let templates = db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) AND approved=1 ORDER BY usage DESC LIMIT 12 OFFSET ?')
+        .all(req.params.id, req.params.id, page * 12);
     let data = {
         user: res.locals.user,
         templates: templates,
