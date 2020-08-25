@@ -651,6 +651,10 @@ app.get('/robots.txt', async (req, res) => {
     map.TXTtoWeb(res);
 });
 
+app.get('/ads.txt', async (req, res) => {
+    res.send('google.com, pub-6223195383839601, DIRECT, f08c47fec0942fa0');
+});
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     if (req.timedout) {
