@@ -521,62 +521,7 @@ app.get('/users/:id', async (req, res) => {
 });
 
 app.get('/modmail-logs/:id', async (req, res) => {
-    let id = req.params.id.split('-');
-    if (id.length !== 3) return errors.sendError404(req, res);
-    let channel, message, fileName;
-    try {
-        channel = BigInt('0x' + id[0]).toString();
-        message = BigInt('0x' + id[1]).toString();
-        fileName = BigInt('0x' + id[2]).toString();
-    } catch (err) {
-        return errors.sendError404(req, res);
-    }
-    let file = await api.fetchFile(`https://cdn.discordapp.com/attachments/${channel}/${message}/modmail_log_${fileName}.txt`);
-    if (file === false) return errors.sendError404(req, res);
-    let messages = [];
-    for (let line of file.split('\n')) {
-        if (/^\[[0-9-]{10} [0-9:]{8}\] [^\n]*#[0-9]{4} \((User|Staff)\):/.test(line) === false) {
-            if (messages.length > 0) {
-                messages[messages.length - 1].message += '\n' + line;
-            }
-            continue;
-        }
-        line = line.split('#');
-        let partOne = line.shift();
-        let partTwo = line.join('#');
-        let timestamp = partOne.slice(1, 20);
-        let username = partOne.slice(22);
-        let discriminator = partTwo.slice(0, 4);
-        let role = 'User';
-        if (partTwo.slice(6).startsWith('Staff')) {
-            role = 'Staff';
-        }
-        let message = partTwo.split(': ').slice(1).join(': ');
-        if (message.startsWith('(Attachment: ')) message = ' ' + message;
-        let attachment = message.split(' (Attachment: ').slice(1).join(' (Attachment: ');
-        message = message.split(' (Attachment: ')[0];
-        let attachments = [];
-        for (let element of attachment.split(') (Attachment: ')) {
-            if (element.endsWith(')')) element = element.slice(0, -1);
-            if (element != '') attachments.push(element);
-        }
-        messages.push({
-            timestamp: timestamp,
-            username: username,
-            discriminator: discriminator,
-            role: role,
-            message: message,
-            attachments: attachments
-        });
-    }
-    if (req.query.json) {
-        res.json(messages);
-    }
-    let data = {
-        user: res.locals.user,
-        messages: messages
-    };
-    res.render('modmail_log', data);
+    res.redirect(`https://modmail.xyz/logs/${req.params.id}`);
 });
 
 app.get('/modmail-search', async (req, res) => {
