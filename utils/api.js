@@ -8,7 +8,7 @@ const config = require('../config.json');
 client.login(config.botToken);
 
 client.on('ready', () => {
-    client.setPresence({
+    client.user.setPresence({
         activity: {
             name: 'discordtemplates.me'
         }
