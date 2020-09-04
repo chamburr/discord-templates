@@ -8,6 +8,7 @@ const config = require('../config.json');
 client.login(config.botToken);
 
 client.on('ready', () => {
+    client.editStatus('online', 'discordtemplates.me');
     console.log(`Logged in as ${client.user.tag}.`);
 });
 
