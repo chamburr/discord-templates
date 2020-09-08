@@ -188,7 +188,7 @@ app.get('/callback', async (req, res) => {
                 timestamp: Date.now()
             }]
         });
-        if (user.avatar == null) user.avatar == '';
+        if (user.avatar == null) user.avatar = '';
         db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?, ?)')
             .run(user.id, user.username, user.avatar, user.discriminator, Date.now().toString(), 0);
         let token = jwt.signToken(auth.access_token);
@@ -545,6 +545,12 @@ let map = sitemap({
             disallow: true
         },
         '/admin': {
+            disallow: true
+        },
+        '/discord': {
+            disallow: true
+        },
+        '/templates/new': {
             disallow: true
         }
     }
