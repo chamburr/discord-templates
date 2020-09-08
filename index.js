@@ -116,9 +116,11 @@ async function authUser(req, res, next) {
 }
 
 async function checkLogin(req, res, next) {
-    const redirectUri = `https://discordapp.com/api/oauth2/authorize?client_id=${config.clientId}&redirect_uri=${encodeURIComponent(config.redirectUri)}&response_type=code&scope=identify`;
+    let path = encodeURIComponent(req.originalUrl.split()[0]);
+    let redirectUri = encodeURIComponent(config.redirectUri);
+    let url = `https://discordapp.com/api/oauth2/authorize?client_id=${config.clientId}&redirect_uri=${redirectUri}&response_type=code&scope=identify%20guilds.join&state=${path}`;
     if (res.locals.user == null) {
-        res.redirect(redirectUri);
+        res.redirect(url);
         return;
     }
     next();
@@ -170,16 +172,25 @@ app.get('/login', checkLogin, async (req, res) => {
 
 app.get('/callback', async (req, res) => {
     if (req.query.code == null) return errors.sendError400(req, res);
+    let path = '/';
+    if (req.query.state != null) path = decodeURIComponent(req.query.state);
+    if (!path.startsWith('/')) path = '/';
     try {
         let auth = await oauth.tokenRequest({
             clientId: config.clientId,
             clientSecret: config.clientSecret,
             code: req.query.code,
-            scope: 'identify',
+            scope: ['identify', 'guilds.join'],
             grantType: 'authorization_code',
             redirectUri: config.redirectUri
         });
         let user = await oauth.getUser(auth.access_token);
+        await oauth.addMember({
+            accessToken: auth.access_token,
+            botToken: config.botToken,
+            guildId: config.guildId,
+            userId: user.id
+        });
         await loginHook.send({
             embeds: [{
                 title: 'User Logged In',
@@ -194,7 +205,7 @@ app.get('/callback', async (req, res) => {
         let token = jwt.signToken(auth.access_token);
         res.cookie('auth', token, {
             maxAge: 604800000
-        }).redirect('/');
+        }).redirect(path);
     } catch (err) {
         errors.sendError401(req, res);
     }
@@ -440,7 +451,7 @@ app.get('/templates/:id', checkTemplate, async (req, res) => {
     res.render('template', data);
 });
 
-app.get('/templates/:id/use', checkTemplate, async (req, res) => {
+app.get('/templates/:id/use', checkLogin, checkTemplate, async (req, res) => {
     res.redirect('https://discord.new/' + res.locals.template.code);
 });
 
