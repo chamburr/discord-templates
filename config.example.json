@@ -2,6 +2,8 @@
   "clientId": "",
   "clientSecret": "",
   "botToken": "",
+  
+  "guildId": "",
 
   "baseUri": "",
   "redirectUri": "",
