@@ -37,7 +37,7 @@ module.exports = async bot => {
     bot.getUser = id => {
         let user = bot.db.prepare('SELECT * FROM user WHERE id=?').get(id);
         if (!user) {
-            bot.db.prepare('INSERT INTO user VALUES (?, ?, ?)').run(id, 6, Date.now());
+            bot.db.prepare('INSERT INTO user VALUES (?, ?, ?)').run(id, 0, Date.now());
             return bot.getUser(id);
         }
         return user;

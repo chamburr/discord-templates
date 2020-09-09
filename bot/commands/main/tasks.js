@@ -19,13 +19,13 @@ exports.run = async (bot, message) => {
         .slice(0, 10);
 
     embed.fields.push({
-        name: 'Join a server - 2 credits',
+        name: 'Join a server - 5 credits',
         value: 'Join these servers and stay for at least 10 minutes. You will receive 2 credits for each!\n' + promotes.join('\n'),
         inline: false
     });
 
     embed.fields.push({
-        name: 'Donate - 20 credits per $1',
+        name: 'Donate - 50 credits per $1',
         value: 'You can donate to us on PayPal for credits! Please DM CHamburr#2591 if you wish to do so.',
         inline: false
     });

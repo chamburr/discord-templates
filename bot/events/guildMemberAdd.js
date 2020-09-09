@@ -7,7 +7,7 @@ module.exports = async (bot, guild, member) => {
     if (promotes.includes(guild.id)) {
         setTimeout(() => {
             if (guild.members.get(id)) {
-                bot.addTask(id, 'server', 2);
+                bot.addTask(id, 'server', 5);
             }
         }, 600000);
     }
