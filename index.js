@@ -65,6 +65,7 @@ async function updateTemplates() {
         }
         if (element.name !== template.name || element.description !== template.description || element.usage !== template.usage_count || element.icon !== template.serialized_source_guild.icon_hash || element.updated !== (new Date(template.updated_at)).getTime().toString()) {
             if (template.serialized_source_guild.icon_hash == null) template.serialized_source_guild.icon_hash = '';
+            if (template.description == null) template.description = '';
             db.prepare('UPDATE template SET name=?, description=?, usage=?, icon=?, updated=? WHERE id=?')
                 .run(template.name, template.description, template.usage_count, template.serialized_source_guild.icon_hash, (new Date(template.updated_at)).getTime().toString(), element.id);
         }
@@ -87,7 +88,7 @@ async function updateUsers() {
             continue;
         }
         if (element.username !== user.username || element.avatar !== user.avatar || element.discriminator !== user.discriminator) {
-            if (user.avatar == null) user.avatar == '';
+            if (user.avatar == null) user.avatar = '';
             db.prepare('UPDATE user SET username=?, avatar=?, discriminator=? WHERE id=?')
                 .run(user.username, user.avatar, user.discriminator, element.id);
         }
