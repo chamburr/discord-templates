@@ -3,7 +3,7 @@ module.exports = async bot => {
 
     await bot.editStatus('online', {
         name: `discordtemplates.me | ${bot.config.prefix}help`,
-        type: 3
+        type: 0
     });
 
     await bot.createMessage(bot.config.channels.botEvent, {
