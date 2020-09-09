@@ -25,7 +25,7 @@
                 </div>
             </div>
         </form>
-        <%- include('partials/ad') %>
+        <%- include('partials/ad', {crawler: crawler}) %>
         <div class="row mt-4">
             <% if (templates.length === 0) { %>
                 <div class="col text-center">
@@ -47,7 +47,7 @@
                href="/search?q=<%= query %>&page=<%= page + 1 %>">Next</a>
         </div>
     </div>
-    <%- include('partials/footer') %>
+    <%- include('partials/footer', {crawler: crawler}) %>
 </div>
 <%- include('partials/foot') %>
 </body>

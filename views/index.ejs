@@ -74,7 +74,7 @@
                 </div>
             <% } %>
         </div>
-        <%- include('partials/ad') %>
+        <%- include('partials/ad', {crawler: crawler}) %>
     </div>
     <hr>
     <div class="container template-section">
@@ -89,7 +89,7 @@
                 <% } %>
             <% } %>
         </div>
-        <%- include('partials/ad') %>
+        <%- include('partials/ad', {crawler: crawler}) %>
     </div>
     <hr>
     <div class="container template-section">
@@ -107,7 +107,7 @@
         <div class="text-center mt-3">
             <a role="button" class="btn btn-primary" href="/tags/community">View More</a>
         </div>
-        <%- include('partials/ad') %>
+        <%- include('partials/ad', {crawler: crawler}) %>
     </div>
     <hr>
     <div class="container template-section pb-0">
@@ -126,7 +126,7 @@
             <a role="button" class="btn btn-primary" href="/tags/gaming">View More</a>
         </div>
     </div>
-    <%- include('partials/footer') %>
+    <%- include('partials/footer', {crawler: crawler}) %>
 </div>
 <%- include('partials/foot') %>
 <script src="/static/js/particles.min.js"></script>

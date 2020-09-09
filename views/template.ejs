@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <%- include('partials/ad') %>
+        <%- include('partials/ad', {crawler: crawler}) %>
         <h4 class="mt-5 mb-4">Details</h4>
         <div class="card shadow py-2 bg-dark">
             <div class="card-body">
@@ -161,7 +161,7 @@
             </div>
         </div>
     </div>
-    <%- include('partials/footer') %>
+    <%- include('partials/footer', {crawler: crawler}) %>
 </div>
 <%- include('partials/foot') %>
 </body>
