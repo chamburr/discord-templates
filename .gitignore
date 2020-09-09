@@ -115,5 +115,7 @@ dist
 
 # Custom
 .idea/
+.DS_Store
 config.json
 data.db
+bot.db

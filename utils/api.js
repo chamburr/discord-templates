@@ -1,26 +1,14 @@
 const request = require('request-promise');
-
-const Discord = require('discord.js');
-const client = new Discord.Client();
-
+const Eris = require('eris');
 const config = require('../config.json');
 
-client.login(config.botToken);
-
-client.on('ready', () => {
-    client.user.setPresence({
-        activity: {
-            name: 'discordtemplates.me'
-        }
-    });
-    console.log(`Logged in as ${client.user.tag}.`);
+const bot = new Eris(`Bot ${config.botToken}`, {
+    restMode: true
 });
 
 async function fetchUser(id) {
     try {
-        let user = new Discord.User(client, {id: id});
-        await user.fetch();
-        return user;
+        return await bot.getRESTUser(id);
     } catch (err) {
         if (err.httpStatus === 404) return false;
         console.log(err.stack);

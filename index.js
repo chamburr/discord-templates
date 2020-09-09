@@ -3,10 +3,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const timeout = require('connect-timeout');
 const sitemap = require('express-sitemap');
-const request = require('request-promise');
 const BetterSqlite3 = require('better-sqlite3');
 const Discord = require('discord.js');
 const DiscordOauth2 = require('discord-oauth2');
+
+require('./bot/index.js');
 
 const config = require('./config.json');
 
