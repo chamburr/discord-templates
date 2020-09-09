@@ -120,7 +120,7 @@ async function checkCrawler(req, res, next) {
     if (agent.includes('Googlebot')) {
         res.locals.crawler = true;
     } else {
-        res.locals.cralwer = false;
+        res.locals.crawler = false;
     }
     next();
 }
