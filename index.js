@@ -115,6 +115,16 @@ async function authUser(req, res, next) {
     next();
 }
 
+async function checkCrawler(req, res, next) {
+    let agent = req.header('User-Agent');
+    if (agent.includes('Googlebot')) {
+        res.locals.crawler = true;
+    } else {
+        res.locals.cralwer = false;
+    }
+    next();
+}
+
 async function checkLogin(req, res, next) {
     let path = encodeURIComponent(req.originalUrl.split()[0]);
     let redirectUri = encodeURIComponent(config.redirectUri);
@@ -226,6 +236,7 @@ app.get('/logout', checkLogin, async (req, res) => {
 app.get('/admin', checkLogin, checkAdmin, async (req, res) => {
     let data = {
         user: res.locals.user,
+        crawler: res.locals.crawler,
         stats: {
             templates: db.prepare('SELECT COUNT(*) as count FROM template WHERE approved=1').get().count,
             users: db.prepare('SELECT COUNT(*) as count FROM user').get().count,
@@ -305,6 +316,7 @@ app.post('/admin/review', checkLogin, checkAdmin, async (req, res) => {
 app.get('/', async (req, res) => {
     let data = {
         user: res.locals.user,
+        crawler: res.locals.crawler,
         top: db.prepare('SELECT * FROM template WHERE approved=1 ORDER BY usage DESC LIMIT 12').all(),
         recent: db.prepare('SELECT * FROM template WHERE approved=1 ORDER BY added DESC LIMIT 6').all(),
         community: db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) AND approved=1 ORDER BY RANDOM() DESC LIMIT 6').all('community', 'community'),
@@ -319,28 +331,32 @@ app.get('/discord', async (req, res) => {
 
 app.get('/about', async (req, res) => {
     let data = {
-        user: res.locals.user
+        user: res.locals.user,
+        crawler: res.locals.crawler
     };
     res.render('about', data);
 });
 
 app.get('/partners', async (req, res) => {
     let data = {
-        user: res.locals.user
+        user: res.locals.user,
+        crawler: res.locals.crawler
     };
     res.render('partners', data);
 });
 
 app.get('/terms', async (req, res) => {
     let data = {
-        user: res.locals.user
+        user: res.locals.user,
+        crawler: res.locals.crawler
     };
     res.render('terms', data);
 });
 
 app.get('/privacy', async (req, res) => {
     let data = {
-        user: res.locals.user
+        user: res.locals.user,
+        crawler: res.locals.crawler
     };
     res.render('privacy', data);
 });
@@ -361,6 +377,7 @@ app.get('/search', async (req, res) => {
     }
     let data = {
         user: res.locals.user,
+        crawler: res.locals.crawler,
         templates: templates,
         query: query,
         page: page + 1
@@ -380,6 +397,7 @@ app.get('/tags/:id', async (req, res) => {
         .all(req.params.id, req.params.id, page * 12);
     let data = {
         user: res.locals.user,
+        crawler: res.locals.crawler,
         templates: templates,
         tag: req.params.id,
         page: page + 1
@@ -389,7 +407,8 @@ app.get('/tags/:id', async (req, res) => {
 
 app.get('/templates/new', checkLogin, checkBan, async (req, res) => {
     let data = {
-        user: res.locals.user
+        user: res.locals.user,
+        crawler: res.locals.crawler
     };
     if (req.query.code != null) {
         data.template = await api.fetchTemplate(req.query.code);
@@ -446,6 +465,7 @@ app.post('/templates/new', checkLogin, checkBan, async (req, res) => {
 app.get('/templates/:id', checkTemplate, async (req, res) => {
     let data = {
         user: res.locals.user,
+        crawler: res.locals.crawler,
         template: res.locals.template
     };
     res.render('template', data);
@@ -459,6 +479,7 @@ app.get('/templates/:id/edit', checkLogin, checkTemplate, async (req, res) => {
     if (res.locals.user.id !== res.locals.template.creator_id && res.locals.user.admin === false) return errors.sendError403(req, res);
     let data = {
         user: res.locals.user,
+        crawler: res.locals.crawler,
         template: res.locals.template,
     };
     res.render('edit_template', data);
@@ -525,6 +546,7 @@ app.get('/users/:id', async (req, res) => {
     if (user == null) return errors.sendError404(req, res);
     let data = {
         user: res.locals.user,
+        crawler: res.locals.crawler,
         profile: user,
         templates: db.prepare('SELECT * FROM template WHERE creator=? AND approved=1 ORDER BY usage DESC').all(req.params.id),
     };
