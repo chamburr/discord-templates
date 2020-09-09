@@ -175,6 +175,7 @@ app.use('/static', express.static('static'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(authUser);
+app.use(checkCrawler);
 
 app.get('/login', checkLogin, async (req, res) => {
     res.redirect('/');
