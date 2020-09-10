@@ -8,19 +8,19 @@ exports.run = async (bot, message, args) => {
 
     if (id === '1') {
         credit = 10;
-        duration = 3600000 * 3;
-    }
-    else if (id === '2') {
-        credit = 20;
-        duration = 3600000 * 6;
-    }
-    else if (id === '3') {
-        credit = 40;
         duration = 3600000 * 12;
     }
-    else if (id === '4') {
-        credit = 80;
+    else if (id === '2') {
+        credit = 25;
         duration = 3600000 * 24;
+    }
+    else if (id === '3') {
+        credit = 50;
+        duration = 3600000 * 24 * 3;
+    }
+    else if (id === '4') {
+        credit = 100;
+        duration = 3600000 * 24 * 7;
     }
 
     if (credit === 0) {
