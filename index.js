@@ -389,7 +389,7 @@ app.get('/search', async (req, res) => {
 });
 
 app.get('/tags/:id', async (req, res) => {
-    if (!config.tag.find(element => element.toLowerCase() === req.params.id)) return errors.sendError400(req, res);
+    if (!config.tag.find(element => element.toLowerCase() === req.params.id)) return errors.sendError404(req, res);
     let page = 0;
     if (req.query.page != null) {
         page = parseInt(req.query.page);
