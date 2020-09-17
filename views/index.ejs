@@ -80,11 +80,9 @@
         <p>These templates are new to the list!</p>
         <div class="row">
             <% for (let element of recent) { %>
-                <% if (!top.find(element2 => element.id == element2.id)) { %>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <%- include('partials/card', {template: element}) %>
-                    </div>
-                <% } %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
             <% } %>
         </div>
         <%- include('partials/ad', {crawler: crawler}) %>
@@ -95,11 +93,9 @@
         <p>These templates have the community tag.</p>
         <div class="row">
             <% for (let element of community) { %>
-                <% if (!top.find(element2 => element.id == element2.id) && !recent.find(element2 => element.id == element2.id)) { %>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <%- include('partials/card', {template: element}) %>
-                    </div>
-                <% } %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
             <% } %>
         </div>
         <div class="text-center mt-3">
@@ -113,11 +109,9 @@
         <p>These templates have the gaming tag.</p>
         <div class="row">
             <% for (let element of gaming) { %>
-                <% if (!top.find(element2 => element.id == element2.id) && !recent.find(element2 => element.id == element2.id) && !community.find(element2 => element.id == element2.id)) { %>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <%- include('partials/card', {template: element}) %>
-                    </div>
-                <% } %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
             <% } %>
         </div>
         <div class="text-center mt-3">
