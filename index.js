@@ -180,6 +180,7 @@ app.use(authUser);
 app.use(checkCrawler);
 
 app.get('/login', checkLogin, async (req, res) => {
+    res.header('X-Robots-Tag', 'noindex');
     res.redirect('/');
 });
 
