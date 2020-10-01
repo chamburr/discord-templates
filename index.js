@@ -199,12 +199,12 @@ app.get('/callback', async (req, res) => {
             redirectUri: config.redirectUri
         });
         let user = await oauth.getUser(auth.access_token);
-        await oauth.addMember({
-            accessToken: auth.access_token,
-            botToken: config.botToken,
-            guildId: config.guildId,
-            userId: user.id
-        });
+//         await oauth.addMember({
+//             accessToken: auth.access_token,
+//             botToken: config.botToken,
+//             guildId: config.guildId,
+//             userId: user.id
+//         });
         await loginHook.send({
             embeds: [{
                 title: 'User Logged In',
