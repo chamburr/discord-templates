@@ -485,6 +485,7 @@ app.post('/templates/new', checkLogin, checkBan, async (req, res) => {
     if (req.body.tag2 === 'None') req.body.tag2 = null;
     else req.body.tag2 = req.body.tag2.toLowerCase();
     if (template.serialized_source_guild.icon_hash == null) template.serialized_source_guild.icon_hash = '';
+    if (template.description == null) template.description = '';
     db.prepare('INSERT INTO template VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
         .run(template.code, template.name, template.description, template.usage_count, template.creator_id, template.source_guild_id, template.serialized_source_guild.icon_hash, (new Date(template.created_at)).getTime().toString(), (new Date(template.updated_at)).getTime().toString(), req.body.tag1, req.body.tag2, Date.now().toString(), 0);
     return errors.sendCustom(req, res, 'OK', 'Template Submitted', 'While we review your template, we encourage you to join our Discord server for updates.', 'Join Discord', '/discord');
