@@ -555,7 +555,7 @@ app.post('/templates/:id/delete', checkLogin, checkTemplate, async (req, res) =>
             fields: [
                 {
                     name: 'Template',
-                    value: `https://discord.new/${req.body.code}`,
+                    value: `https://discord.new/${res.locals.template.code}`,
                     inline: false
                 },
                 {
