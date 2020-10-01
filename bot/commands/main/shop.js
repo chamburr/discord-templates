@@ -8,30 +8,30 @@ exports.run = async (bot, message) => {
             `Use \`${bot.config.prefix}tasks\` to see how to get more credits!`,
         fields: [
             {
-                name: 'Grow your server (3h) - 10 credits',
+                name: 'Grow your server (12h) - 10 credits',
                 value:
-                    'Get a small boost of members in this server! Valid for 3 hours.\n' +
+                    'Get a small boost of members in this server! Valid for 12 hours.\n' +
                     `Use \`${bot.config.prefix}buy 1\` to buy and activate it.`,
                 inline: false
             },
             {
-                name: 'Grow your server (6h) - 20 credits',
+                name: 'Grow your server (1d) - 25 credits',
                 value:
-                    'Get a medium boost of members in this server! Valid for 6 hours.\n' +
+                    'Get a medium boost of members in this server! Valid for 1 day.\n' +
                     `Use \`${bot.config.prefix}buy 2\` to buy and activate it.`,
                 inline: false
             },
             {
-                name: 'Grow your server (12h) - 40 credits',
+                name: 'Grow your server (3d) - 50 credits',
                 value:
-                    'Get a large boost of members in this server! Valid for 12 hours.\n' +
+                    'Get a large boost of members in this server! Valid for 3 days.\n' +
                     `Use \`${bot.config.prefix}buy 3\` to buy and activate it.`,
                 inline: false
             },
             {
-                name: 'Grow your server (24h) - 80 credits',
+                name: 'Grow your server (7d) - 100 credits',
                 value:
-                    'Get a huge boost of members in this server! Valid for 24 hours.\n' +
+                    'Get a huge boost of members in this server! Valid for 7 days.\n' +
                     `Use \`${bot.config.prefix}buy 4\` to buy and activate it.`,
                 inline: false
             }

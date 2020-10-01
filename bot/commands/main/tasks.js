@@ -24,11 +24,11 @@ exports.run = async (bot, message) => {
         inline: false
     });
 
-    embed.fields.push({
-        name: 'Donate - 50 credits per $1',
-        value: 'You can donate to us on PayPal for credits! Please DM CHamburr#2591 if you wish to do so.',
-        inline: false
-    });
+    //embed.fields.push({
+    //    name: 'Donate - 50 credits per $1',
+    //    value: 'You can donate to us on PayPal for credits! Please DM CHamburr#2591 if you wish to do so.',
+    //    inline: false
+    //});
 
     embed.fields.push({
         name: 'More coming soon...',

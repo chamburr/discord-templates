@@ -38,9 +38,7 @@ module.exports = async (bot, guild, member) => {
         '- Be unique! Look for a topic that doesn\'t exist in other servers yet.\n' +
         '- Be specific! It will be much easier for your members to join the conversation.\n' +
         '- Think about why you would want to join a server. Always remember this!\n\n' +
-        'When you are ready, be sure to share your server in <#753092518001901650>! Also, we have specially designed a bot for you ' +
-        'to quickly and easily grow your community! It\'s simple. Just invite it to your server and type `$info` to get started! ' +
-        'Invite link: <https://discord.com/api/oauth2/authorize?client_id=696170556969582632&permissions=8&scope=bot>\n\n' +
+        'When you are ready, be sure to share your server in <#753092518001901650>!\n\n' +
         'For a complete guide, check out <#696179394070184016>. Have fun :)'
     );
 };

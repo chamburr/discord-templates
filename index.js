@@ -189,6 +189,7 @@ app.use(authUser);
 app.use(checkCrawler);
 
 app.get('/login', checkLogin, async (req, res) => {
+    res.header('X-Robots-Tag', 'noindex');
     res.redirect('/');
 });
 
@@ -413,7 +414,7 @@ app.get('/search', async (req, res) => {
 });
 
 app.get('/tags/:id', async (req, res) => {
-    if (!config.tag.find(element => element.toLowerCase() === req.params.id)) return errors.sendError400(req, res);
+    if (!config.tag.find(element => element.toLowerCase() === req.params.id)) return errors.sendError404(req, res);
     let page = 0;
     if (req.query.page != null) {
         page = parseInt(req.query.page);
@@ -585,62 +586,69 @@ app.get('/modmail-logs/:id', async (req, res) => {
     res.redirect(`https://modmail.xyz/logs/${req.params.id}`);
 });
 
-let templates = db.prepare('SELECT guild FROM template').all();
-let users = db.prepare('SELECT id FROM user').all();
-let tags = config.tag;
+let map;
 
-let map = sitemap({
-    http: 'https',
-    url: 'discordtemplates.me',
-    sitemapSubmission: '/sitemap.xml',
-    generate: app,
-    hideByRegex: [/:id/],
-    route: {
-        '/login': {
-            disallow: true
-        },
-        '/logout': {
-            disallow: true
-        },
-        '/callback': {
-            disallow: true
-        },
-        '/admin': {
-            disallow: true
-        },
-        '/discord': {
-            disallow: true
-        },
-        '/templates/new': {
-            disallow: true
+function generateSitemap() {
+    let templates = db.prepare('SELECT guild FROM template').all();
+    let users = db.prepare('SELECT id FROM user').all();
+    let tags = config.tag;
+
+    map = sitemap({
+        http: 'https',
+        url: 'discordtemplates.me',
+        sitemapSubmission: '/sitemap.xml',
+        generate: app,
+        hideByRegex: [/:id/],
+        route: {
+            '/login': {
+                disallow: true
+            },
+            '/logout': {
+                disallow: true
+            },
+            '/callback': {
+                disallow: true
+            },
+            '/admin': {
+                disallow: true
+            },
+            '/discord': {
+                disallow: true
+            },
+            '/templates/new': {
+                disallow: true
+            }
         }
-    }
-});
+    });
 
-map.map = {
-    ...map.map,
-    ...(() => {
-        let obj = {};
-        tags.forEach(element => {
-            obj['/tags/' + element.toLowerCase()] = ['get'];
-        });
-        return obj;
-    })(),
-    ...(() => {
-        let obj = {};
-        templates.forEach(element => {
-            obj['/templates/' + element.guild] = ['get'];
-        });
-        return obj;
-    })(),
-    ...(() => {
-        let obj = {};
-        users.forEach(element => {
-            obj['/users/' + element.id] = ['get'];
-        });
-        return obj;
-    })()
-};
+    map.map = {
+        ...map.map,
+        ...(() => {
+            let obj = {};
+            tags.forEach(element => {
+                obj['/tags/' + element.toLowerCase()] = ['get'];
+            });
+            return obj;
+        })(),
+        ...(() => {
+            let obj = {};
+            templates.forEach(element => {
+                obj['/templates/' + element.guild] = ['get'];
+            });
+            return obj;
+        })(),
+        ...(() => {
+            let obj = {};
+            users.forEach(element => {
+                obj['/users/' + element.id] = ['get'];
+            });
+            return obj;
+        })()
+    };
+}
+
+generateSitemap();
+setInterval(() => generateSitemap(), 60000);
 
 app.get('/sitemap.xml', async (req, res) => {
     map.XMLtoWeb(res);

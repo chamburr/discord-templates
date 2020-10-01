@@ -34,11 +34,7 @@ bot.getCommand = command => {
 };
 
 bot.loadCommands = () => {
-    let files = fs.readdirSync('./bot/commands/');
-
-    files.forEach(f => {
-        if (f.startsWith('.')) return;
-
+    bot.config.modules.forEach(f => {
         let files2 = fs.readdirSync(`./bot/commands/${f}/`);
         files2.forEach(f2 => {
             if (f2.startsWith('.')) return;
