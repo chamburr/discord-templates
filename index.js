@@ -297,7 +297,7 @@ app.post('/admin/review', checkLogin, checkAdmin, async (req, res) => {
                         inline: false
                     },
                     {
-                        name: 'Moderator',
+                        name: 'Administrator',
                         value: `${res.locals.user.username}#${res.locals.user.discriminator} (${res.locals.user.id})`,
                         inline: false
                     },
@@ -323,7 +323,7 @@ app.post('/admin/review', checkLogin, checkAdmin, async (req, res) => {
                         inline: false
                     },
                     {
-                        name: 'Moderator',
+                        name: 'Administrator',
                         value: `${res.locals.user.username}#${res.locals.user.discriminator}`,
                         inline: false
                     },
