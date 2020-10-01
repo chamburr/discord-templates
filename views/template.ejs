@@ -44,8 +44,50 @@
                         </h4>
                         <p class="card-text mb-1"><%= template.description %></p>
                         <div>
-                            <a role="button" class="btn btn-primary mt-2" target="_blank"
-                               href="/templates/<%= template.source_guild_id %>/use">Use Template</a>
+                            <% if (locals.user != null) { %>
+                                <a role="button" class="btn btn-primary mt-2" target="_blank"
+                                   href="/templates/<%= template.source_guild_id %>/use">Use Template</a>
+                            <% } else { %>
+                                <button class="btn btn-primary mt-2" type="button" data-toggle="modal"
+                                        data-target="#login-modal">
+                                    Use Template
+                                </button>
+                                <div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
+                                     aria-labelledby="login-modal-label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content bg-dark">
+                                            <div class="modal-header border-secondary">
+                                                <h5 class="modal-title" id="login-modal-label">Login Required</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true" class="text-white"
+                                                          style="text-shadow: none;">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Before you can use the server template, please login to our website.
+                                                <div class="custom-control custom-checkbox mt-2">
+                                                    <input type="checkbox" class="custom-control-input" id="login-modal-check" checked>
+                                                    <label class="custom-control-label" for="login-modal-check">Join our server</label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer border-secondary">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Cancel
+                                                </button>
+                                                <a role="button" class="btn btn-primary" target="_blank"
+                                                   href="<%= redirectUri %>" id="login-modal-button-with-join">
+                                                    Login
+                                                </a>
+                                                <a role="button" class="btn btn-primary" target="_blank"
+                                                   href="<%= redirectUri.replace('%20guilds.join', '') %>" id="login-modal-button">
+                                                    Login
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
                             <% if (locals.user != null && (user.admin === true || user.id == template.creator_id)) { %>
                                 <a role="button" class="btn btn-secondary ml-1 mt-2"
                                    href="/templates/<%= template.source_guild_id %>/edit">Edit</a>
@@ -164,6 +206,18 @@
     <%- include('partials/footer', {crawler: crawler}) %>
 </div>
 <%- include('partials/foot') %>
+<script>
+    $('#login-modal-button').hide();
+    $('#login-modal-check').change(function() {
+        if($(this).prop('checked')) {
+            $('#login-modal-button').hide();
+            $('#login-modal-button-with-join').show();
+        } else {
+            $('#login-modal-button').show();
+            $('#login-modal-button-with-join').hide();
+        }
+    });
+</script>
 </body>
 
 </html>

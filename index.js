@@ -127,10 +127,19 @@ async function checkCrawler(req, res, next) {
     next();
 }
 
+async function getOauthUri(scope, path) {
+    if (!scope) scope = ['identify'];
+    let url = 'https://discord.com/api/oauth2/authorize?';
+    url += `client_id=${config.clientId}`;
+    url += '&response_type=code';
+    url += `&redirect_uri=${encodeURIComponent(config.redirectUri)}`;
+    url += `&scope=${scope.join('%20')}`;
+    url += `&state=${encodeURIComponent(path)}`;
+    return url;
+}
+
 async function checkLogin(req, res, next) {
-    let path = encodeURIComponent(req.originalUrl.split()[0]);
-    let redirectUri = encodeURIComponent(config.redirectUri);
-    let url = `https://discordapp.com/api/oauth2/authorize?client_id=${config.clientId}&redirect_uri=${redirectUri}&response_type=code&scope=identify%20guilds.join&state=${path}`;
+    let url = await getOauthUri(null, req.originalUrl.split()[0]);
     if (res.locals.user == null) {
         res.redirect(url);
         return;
@@ -188,40 +197,55 @@ app.get('/callback', async (req, res) => {
     let path = '/';
     if (req.query.state != null) path = decodeURIComponent(req.query.state);
     if (!path.startsWith('/')) path = '/';
-    try {
+    async function authUser(code, scope) {
         let auth = await oauth.tokenRequest({
             clientId: config.clientId,
             clientSecret: config.clientSecret,
-            code: req.query.code,
-            scope: ['identify', 'guilds.join'],
+            code: code,
+            scope: scope,
             grantType: 'authorization_code',
             redirectUri: config.redirectUri
         });
         let user = await oauth.getUser(auth.access_token);
-        await oauth.addMember({
-            accessToken: auth.access_token,
-            botToken: config.botToken,
-            guildId: config.guildId,
-            userId: user.id
-        });
-        await loginHook.send({
-            embeds: [{
-                title: 'User Logged In',
-                color: 0x00FF00,
-                description: `${user.username}#${user.discriminator} (${user.id})`,
-                timestamp: Date.now()
-            }]
-        });
-        if (user.avatar == null) user.avatar = '';
-        db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?, ?)')
-            .run(user.id, user.username, user.avatar, user.discriminator, Date.now().toString(), 0);
-        let token = jwt.signToken(auth.access_token);
-        res.cookie('auth', token, {
-            maxAge: 604800000
-        }).redirect(path);
-    } catch (err) {
-        errors.sendError401(req, res);
+        if (scope.includes('guilds.join')) {
+            await oauth.addMember({
+                accessToken: auth.access_token,
+                botToken: config.botToken,
+                guildId: config.guildId,
+                userId: user.id
+            });
+        }
+        return {
+            token: auth.access_token,
+            ...user
+        };
     }
+    let user;
+    try {
+        user = await authUser(req.query.code, ['identify', 'guilds.join']);
+    } catch (err) {
+        try {
+            user = await authUser(req.query.code, ['identify']);
+        } catch (err) {
+            errors.sendError401(req, res);
+            return;
+        }
+    }
+    await loginHook.send({
+        embeds: [{
+            title: 'User Logged In',
+            color: 0x00FF00,
+            description: `${user.username}#${user.discriminator} (${user.id})`,
+            timestamp: Date.now()
+        }]
+    });
+    if (user.avatar == null) user.avatar = '';
+    db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?, ?)')
+        .run(user.id, user.username, user.avatar, user.discriminator, Date.now().toString(), 0);
+    let token = jwt.signToken(user.token);
+    res.cookie('auth', token, {
+        maxAge: 604800000
+    }).redirect(path);
 });
 
 app.get('/logout', checkLogin, async (req, res) => {
@@ -469,7 +493,8 @@ app.get('/templates/:id', checkTemplate, async (req, res) => {
     let data = {
         user: res.locals.user,
         crawler: res.locals.crawler,
-        template: res.locals.template
+        template: res.locals.template,
+        redirectUri: await getOauthUri(['identify', 'guilds.join'], req.originalurl.split()[0] + '/use')
     };
     res.render('template', data);
 });
