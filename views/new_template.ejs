@@ -16,6 +16,11 @@
         <div class="card shadow py-2 bg-dark">
             <div class="card-body">
                 <h5 class="card-title">Your Template</h5>
+                <p>
+                    To create a server template, please go to Server Settings → Server Template. You can set a title
+                    and a description for your template. Once you are done, click on generate link, and paste the link
+                    below. It should look something like this: https://discord.new/VPZ6258KTWqs.
+                </p>
                 <form class="needs-validation" method="<%= locals.template != null ? 'post' : 'get' %>"
                       action="/templates/new" novalidate>
                     <div class="form-group">
