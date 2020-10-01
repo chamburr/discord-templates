@@ -495,7 +495,7 @@ app.get('/templates/:id', checkTemplate, async (req, res) => {
         user: res.locals.user,
         crawler: res.locals.crawler,
         template: res.locals.template,
-        redirectUri: await getOauthUri(['identify', 'guilds.join'], req.originalurl.split()[0] + '/use')
+        redirectUri: await getOauthUri(['identify', 'guilds.join'], req.originalUrl.split()[0] + '/use')
     };
     res.render('template', data);
 });
