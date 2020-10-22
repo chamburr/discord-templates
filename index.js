@@ -223,10 +223,10 @@ app.get('/callback', async (req, res) => {
     }
     let user;
     try {
-        user = await authUser(req.query.code, 'identify guilds.join');
+        user = await authUser(req.query.code, ['identify', 'guilds.join']);
     } catch (err) {
         try {
-            user = await authUser(req.query.code, 'identify');
+            user = await authUser(req.query.code, ['identify']);
         } catch (err) {
             errors.sendError401(req, res);
             return;
