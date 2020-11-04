@@ -3,7 +3,8 @@ function sendError400(req, res) {
         user: res.locals.user,
         heading: '400',
         title: 'Bad Request',
-        description: 'The request you made is invalid.'
+        description: 'The request you made is invalid.',
+        crawler: res.locals.crawler
     };
     res.status(400).render('error', data);
 }
@@ -13,7 +14,8 @@ function sendError401(req, res) {
         user: res.locals.user,
         heading: '401',
         title: 'Unauthorised',
-        description: 'You are not authorized to access this page.'
+        description: 'You are not authorized to access this page.',
+        crawler: res.locals.crawler
     };
     res.status(401).render('error', data);
 }
@@ -23,7 +25,8 @@ function sendError403(req, res) {
         user: res.locals.user,
         heading: '403',
         title: 'Forbidden',
-        description: 'You do not have permission to access this page.'
+        description: 'You do not have permission to access this page.',
+        crawler: res.locals.crawler
     };
     res.status(403).render('error', data);
 }
@@ -33,7 +36,8 @@ function sendError404(req, res) {
         user: res.locals.user,
         heading: '404',
         title: 'Page Not Found',
-        description: 'The page you are looking for does not exist.'
+        description: 'The page you are looking for does not exist.',
+        crawler: res.locals.crawler
     };
     res.status(404).render('error', data);
 }
@@ -43,7 +47,8 @@ function sendError500(req, res) {
         user: res.locals.user,
         heading: '500',
         title: 'Internal Server Error',
-        description: 'The server encountered an internal error.'
+        description: 'The server encountered an internal error.',
+        crawler: res.locals.crawler
     };
     res.status(500).render('error', data);
 }
@@ -53,7 +58,8 @@ function sendError503(req, res) {
         user: res.locals.user,
         heading: '503',
         title: 'Service Unavailable',
-        description: 'The server cannot handle your request at this time.'
+        description: 'The server cannot handle your request at this time.',
+        crawler: res.locals.crawler
     };
     res.status(503).render('error', data);
 }
@@ -63,7 +69,8 @@ function sendError(req, res, description) {
         user: res.locals.user,
         heading: 'ERR',
         title: 'An Error Occurred',
-        description: description
+        description: description,
+        crawler: res.locals.crawler
     };
     res.render('error', data);
 }
@@ -75,7 +82,8 @@ function sendCustom(req, res, heading, title, description, buttonText, buttonLin
         title: title,
         description: description,
         buttonText: buttonText,
-        buttonLink: buttonLink
+        buttonLink: buttonLink,
+        crawler: res.locals.crawler
     };
     res.render('error', data);
 }
