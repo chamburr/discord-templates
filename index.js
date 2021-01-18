@@ -581,7 +581,7 @@ app.get('/users/:id', async (req, res) => {
         crawler: res.locals.crawler,
         profile: user,
         templates: db.prepare('SELECT * FROM template WHERE creator=? AND approved=1 ORDER BY usage DESC').all(req.params.id),
-        banned: banned.contains(req.params.id),
+        banned: banned.includes(req.params.id),
     };
     res.render('user', data);
 });
