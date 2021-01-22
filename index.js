@@ -572,8 +572,6 @@ app.post('/templates/:id/delete', checkLogin, checkTemplate, async (req, res) =>
 });
 
 app.get('/users/:id', async (req, res) => {
-    let banned = ['408005465423872001','478937019758673931','316641074967871500','489811754411491328','295448859407024129','364456580042719253','301374055867613184','307993889006944256','338972768211304450','362628147994165250','495665367272914945','495584014934081538','320841624651300884','524681391959441419','344941340238413825','469032191775473685','385117340028764165','762006344206123078','490537526436560896','228965621478588416','93801185122713600'];
-    
     let user = db.prepare('SELECT * FROM user WHERE id=?').get(req.params.id);
     if (user == null) return errors.sendError404(req, res);
     let data = {
@@ -581,7 +579,6 @@ app.get('/users/:id', async (req, res) => {
         crawler: res.locals.crawler,
         profile: user,
         templates: db.prepare('SELECT * FROM template WHERE creator=? AND approved=1 ORDER BY usage DESC').all(req.params.id),
-        banned: banned.includes(req.params.id),
     };
     res.render('user', data);
 });

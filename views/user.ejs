@@ -2,11 +2,7 @@
 <html lang="en">
 
 <head>
-    <% if (!banned) { %>
     <%- include('partials/head', {title: profile.username + '#' + profile.discriminator, description: '', image: profile.avatar == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=256`}) %>
-    <% } else { %>
-    <%- include('partials/head', {title: 'Disabled Page', description: '', image: 'https://cdn.discordapp.com/embed/avatars/0.png'}) %>
-    <% } %>
 </head>
 
 <body>
@@ -18,7 +14,6 @@
         </div>
         <div class="card shadow py-2 bg-dark">
             <div class="card-body">
-                <% if (!banned) { %>
                 <div class="row">
                     <div class="col col-lg-1"></div>
                     <div class="col-12 col-lg-3 text-center">
@@ -43,15 +38,9 @@
                     </div>
                     <div class="col col-lg-1"></div>
                 </div>
-                <% } else { %>
-                <div class="text-center">
-                    <h3>This page has been temporarily disabled. It will be back soon! :)</h3>
-                </div>
-                <% } %>
             </div>
         </div>
         <%- include('partials/ad', {crawler: crawler}) %>
-        <% if (!banned) { %>
         <h4 class="mt-5 mb-4">Templates</h4>
         <div class="row">
             <% if (templates.length === 0) { %>
@@ -67,7 +56,6 @@
                 <% } %>
             <% } %>
         </div>
-        <% } %>
     </div>
     <%- include('partials/footer', {crawler: crawler}) %>
 </div>
