@@ -25,7 +25,7 @@ db.prepare(`CREATE TABLE IF NOT EXISTS template
         name        text    NOT NULL,
         description text    NOT NULL,
         usage       integer NOT NULL,
-        creator     text    NOT NULeL,
+        creator     text    NOT NULL,
         guild       text    NOT NULL,
         icon        text    NOT NULL,
         created     text    NOT NULL,
