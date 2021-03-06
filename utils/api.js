@@ -6,7 +6,7 @@ const bot = new Eris(`Bot ${config.botToken}`, {
     restMode: true
 });
 
-bot.on('ready', async bot => {
+bot.on('ready', async () => {
     await bot.editStatus('online', {
         name: 'discordtemplates.me',
         type: 0
