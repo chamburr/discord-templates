@@ -17,8 +17,8 @@
             <div class="card-body">
                 <h5 class="card-title">Your Template</h5>
                 <p>
-                    To create a server template, please go to Server Settings → Server Template. You can set a title
-                    and a description for your template. Once you are done, click on generate link, and paste the link
+                    To create a server template, please go to Server Settings → Server Template. You can set a title and
+                    a description for your template. Once you are done, click on generate link, and paste the link
                     below. It should look something like this: https://discord.new/VPZ6258KTWqs.
                 </p>
                 <form class="needs-validation" method="<%= locals.template != null ? 'post' : 'get' %>"
@@ -30,8 +30,7 @@
                                 <span class="input-group-text form-control-darker">https://discord.new/</span>
                             </div>
                             <input name="code" type="text" class="form-control form-control-darker" id="template-code"
-                                   value="<%= locals.template != null ? template.code : '' %>"
-                                    <%= locals.template != null ? 'readonly' : 'required' %>>
+                                   value="<%= locals.template != null ? template.code : '' %>" <%= locals.template != null ? 'readonly' : 'required' %>>
                         </div>
                     </div>
                     <% if (locals.template != null) { %>
@@ -90,13 +89,6 @@
 </div>
 <%- include('partials/foot') %>
 <script>
-    $('input[type=radio][name=server]').change(function () {
-        if (this.value == 'true') {
-            $('#template-server-hint').removeClass('d-none');
-        } else {
-            $('#template-server-hint').addClass('d-none');
-        }
-    });
     $('#template-code').on('input', function () {
         if (this.value.startsWith('https://discord.new/')) {
             $(this).val(this.value.substring(20));

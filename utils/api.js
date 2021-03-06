@@ -6,6 +6,15 @@ const bot = new Eris(`Bot ${config.botToken}`, {
     restMode: true
 });
 
+bot.on('ready', async bot => {
+    await bot.editStatus('online', {
+        name: 'discordtemplates.me',
+        type: 0
+    });
+});
+
+bot.connect();
+
 async function fetchUser(id) {
     try {
         return await bot.getRESTUser(id);
@@ -31,23 +40,7 @@ async function fetchTemplate(id) {
     }
 }
 
-async function fetchFile(url) {
-    try {
-        return await request({
-            method: 'GET',
-            uri: url,
-            headers: {
-                'User-Agent': 'DiscordBot (custom, 1.0.0)'
-            }
-        });
-    } catch (err) {
-        if (err.statusCode === 404) return false;
-        console.error(err.stack);
-    }
-}
-
 module.exports = {
     fetchUser,
     fetchTemplate,
-    fetchFile
 };

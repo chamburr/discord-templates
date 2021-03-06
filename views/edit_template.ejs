@@ -16,7 +16,8 @@
         <div class="card shadow py-2 bg-dark">
             <div class="card-body">
                 <h5 class="card-title">Your Template</h5>
-                <form class="needs-validation" method="post" action="/templates/<%= template.source_guild_id %>/edit" novalidate>
+                <form class="needs-validation" method="post" action="/templates/<%= template.source_guild_id %>/edit"
+                      novalidate>
                     <div class="form-group">
                         <label for="template-code" class="col-form-label">Link</label>
                         <div class="input-group">
@@ -78,16 +79,6 @@
     <%- include('partials/footer', {crawler: crawler}) %>
 </div>
 <%- include('partials/foot') %>
-<script>
-    $('input[type=radio][name=server]').change(function () {
-        console.log('here')
-        if (this.value == 'true') {
-            $('#template-server-hint').removeClass('d-none');
-        } else {
-            $('#template-server-hint').addClass('d-none');
-        }
-    });
-</script>
 </body>
 
 </html>

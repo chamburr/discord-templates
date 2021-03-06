@@ -118,4 +118,3 @@ dist
 .DS_Store
 config.json
 data.db
-bot.db

@@ -11,19 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/better-sqlite3": "^5.4.1",
-    "@types/express": "^4.17.8",
-    "better-sqlite3": "^7.1.1",
+    "better-sqlite3": "^7.1.2",
     "body-parser": "^1.19.0",
-    "bufferutil": "^4.0.2",
     "connect-timeout": "^1.9.0",
     "cookie-parser": "^1.4.5",
-    "discord-oauth2": "^2.5.0",
-    "discord.js": "^12.4.1",
-    "ejs": "^3.1.5",
-    "enmap": "^5.8.0",
-    "eris": "^0.13.3",
-    "erlpack": "abalabahaha/erlpack",
+    "discord-oauth2": "^2.6.0",
+    "discord.js": "^12.5.1",
+    "ejs": "^3.1.6",
+    "eris": "^0.14.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-sitemap": "^1.8.0",
@@ -31,7 +26,6 @@
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5",
-    "zlib-sync": "^0.1.7"
+    "request-promise": "^4.2.5"
   }
 }

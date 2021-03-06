@@ -7,36 +7,34 @@ const BetterSqlite3 = require('better-sqlite3');
 const Discord = require('discord.js');
 const DiscordOauth2 = require('discord-oauth2');
 
-require('./bot/index.js');
-
 const config = require('./config.json');
 
 const db = new BetterSqlite3('data.db');
 db.prepare(`CREATE TABLE IF NOT EXISTS user
-            (
-                id            text    NOT NULL PRIMARY KEY,
-                username      text    NOT NULL,
-                avatar        text    NOT NULL,
-                discriminator text    NOT NULL,
-                joined        text    NOT NULL,
-                banned        integer NOT NULL
-            )`).run();
+    (
+        id            text    NOT NULL PRIMARY KEY,
+        username      text    NOT NULL,
+        avatar        text    NOT NULL,
+        discriminator text    NOT NULL,
+        joined        text    NOT NULL,
+        banned        integer NOT NULL
+    )`).run();
 db.prepare(`CREATE TABLE IF NOT EXISTS template
-            (
-                id          text    NOT NULL PRIMARY KEY,
-                name        text    NOT NULL,
-                description text    NOT NULL,
-                usage       integer NOT NULL,
-                creator     text    NOT NULL,
-                guild       text    NOT NULL,
-                icon        text    NOT NULL,
-                created     text    NOT NULL,
-                updated     text    NOT NULL,
-                tag1        text    NOT NULL,
-                tag2        text,
-                added       text    NOT NULL,
-                approved    integer NOT NULL
-            )`).run();
+    (
+        id          text    NOT NULL PRIMARY KEY,
+        name        text    NOT NULL,
+        description text    NOT NULL,
+        usage       integer NOT NULL,
+        creator     text    NOT NULeL,
+        guild       text    NOT NULL,
+        icon        text    NOT NULL,
+        created     text    NOT NULL,
+        updated     text    NOT NULL,
+        tag1        text    NOT NULL,
+        tag2        text,
+        added       text    NOT NULL,
+        approved    integer NOT NULL
+    )`).run();
 
 const loginHook = new Discord.WebhookClient(config.loginHookId, config.loginHookToken);
 const actionHook = new Discord.WebhookClient(config.actionHookId, config.actionHookToken);
@@ -119,11 +117,7 @@ async function authUser(req, res, next) {
 
 async function checkCrawler(req, res, next) {
     let agent = req.header('User-Agent');
-    if (agent.includes('Googlebot')) {
-        res.locals.crawler = true;
-    } else {
-        res.locals.crawler = false;
-    }
+    res.locals.crawler = !!agent.includes('Googlebot');
     next();
 }
 
@@ -135,6 +129,8 @@ async function getOauthUri(scope, path) {
     url += `&redirect_uri=${encodeURIComponent(config.redirectUri)}`;
     url += `&scope=${scope.join('%20')}`;
     url += `&state=${encodeURIComponent(path)}`;
+    if (scope.includes('guilds.join')) url += ':true';
+    else url += ':false'
     return url;
 }
 
@@ -196,8 +192,14 @@ app.get('/login', checkLogin, async (req, res) => {
 app.get('/callback', async (req, res) => {
     if (req.query.code == null) return errors.sendError400(req, res);
     let path = '/';
-    if (req.query.state != null) path = decodeURIComponent(req.query.state);
+    let joinGuild = false;
+    if (req.query.state != null) {
+        let state = decodeURIComponent(req.query.state).split(':');
+        if (state.length >= 1) path = state[0];
+        if (state.length >= 2 && state[1] === 'true') joinGuild = true;
+    }
     if (!path.startsWith('/')) path = '/';
+
     async function authUser(code, scope) {
         let auth = await oauth.tokenRequest({
             clientId: config.clientId,
@@ -221,16 +223,17 @@ app.get('/callback', async (req, res) => {
             ...user
         };
     }
+
     let user;
     try {
-        user = await authUser(req.query.code, ['identify', 'guilds.join']);
-    } catch (err) {
-        try {
+        if (joinGuild) {
+            user = await authUser(req.query.code, ['identify', 'guilds.join']);
+        } else {
             user = await authUser(req.query.code, ['identify']);
-        } catch (err) {
-            errors.sendError401(req, res);
-            return;
         }
+    } catch (err) {
+        errors.sendError401(req, res);
+        return;
     }
     await loginHook.send({
         embeds: [{
@@ -460,8 +463,7 @@ app.post('/templates/new', checkLogin, checkBan, async (req, res) => {
     if (res.locals.user.admin === true) {
         db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?, ?)')
             .run(template.creator.id, template.creator.username, template.creator.avatar, template.creator.discriminator, Date.now().toString(), 0);
-    }
-    else if (template.creator_id !== res.locals.user.id) return errors.sendError(req, res, 'You can only add your own template.');
+    } else if (template.creator_id !== res.locals.user.id) return errors.sendError(req, res, 'You can only add your own template.');
     await actionHook.send({
         embeds: [{
             title: 'Template Submitted',

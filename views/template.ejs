@@ -67,7 +67,8 @@
                                             <div class="modal-body">
                                                 Before you can use the server template, please login to our website.
                                                 <div class="custom-control custom-checkbox mt-2">
-                                                    <input type="checkbox" class="custom-control-input" id="login-modal-check" checked>
+                                                    <input type="checkbox" class="custom-control-input"
+                                                           id="login-modal-check" checked>
                                                     <label class="custom-control-label" for="login-modal-check">
                                                         Join our official Discord server
                                                     </label>
@@ -82,7 +83,8 @@
                                                     Login
                                                 </a>
                                                 <a role="button" class="btn btn-primary" target="_blank"
-                                                   href="<%= redirectUri.replace('%20guilds.join', '') %>" id="login-modal-button">
+                                                   href="<%= redirectUri.replace('%20guilds.join', '') %>"
+                                                   id="login-modal-button">
                                                     Login
                                                 </a>
                                             </div>
@@ -201,7 +203,8 @@
                 </div>
             </div>
             <div class="card-footer text-center text-muted">
-                Tip: <span class="d-none d-md-inline">Hover over</span><span class="d-md-none">Long press</span> a channel or role name to see details.
+                Tip: <span class="d-none d-md-inline">Hover over</span><span class="d-md-none">Long press</span> a
+                channel or role name to see details.
             </div>
         </div>
     </div>
@@ -210,8 +213,8 @@
 <%- include('partials/foot') %>
 <script>
     $('#login-modal-button').hide();
-    $('#login-modal-check').change(function() {
-        if($(this).prop('checked')) {
+    $('#login-modal-check').change(function () {
+        if ($(this).prop('checked')) {
             $('#login-modal-button').hide();
             $('#login-modal-button-with-join').show();
         } else {

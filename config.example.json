@@ -3,21 +3,6 @@
   "clientSecret": "",
   "botToken": "",
 
-  "guildId": "",
-  "channels": {
-    "botEvent": "",
-    "botJoinLeave": "",
-    "joinLeave": ""
-  },
-  "prefix": "",
-  "modules": [],
-  "colors": {
-    "primary": 0,
-    "error": 0
-  },
-  "owners": [],
-  "admins": [],
-
   "baseUri": "",
   "redirectUri": "",
 
