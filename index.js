@@ -126,11 +126,12 @@ async function getOauthUri(scope, path) {
     let url = 'https://discord.com/api/oauth2/authorize?';
     url += `client_id=${config.clientId}`;
     url += '&response_type=code';
+    url += '&prompt=none';
     url += `&redirect_uri=${encodeURIComponent(config.redirectUri)}`;
     url += `&scope=${scope.join('%20')}`;
     url += `&state=${encodeURIComponent(path)}`;
     if (scope.includes('guilds.join')) url += ':true';
-    else url += ':false'
+    else url += ':false';
     return url;
 }
 
