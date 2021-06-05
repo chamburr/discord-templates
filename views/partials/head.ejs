@@ -1,36 +1,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description"
-      content="<%= locals.description != null ? description : 'Discord Templates - Discover a huge variety of Discord server templates for all purposes.' %>">
-<meta name="author" content="CHamburr#2591">
+<meta name="description" content="<%= locals.description != null ? description :
+        'Discord Templates - Discover a huge variety of Discord server templates for all purposes.' %>">
 <meta name="theme-color" content="#1e90ff">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://discordtemplates.me">
-<% if (locals.title != null) { %>
-    <meta property="og:site_name" content="Discord Templates">
-<% } %>
+<meta property="og:site_name" content="Discord Templates">
 <meta property="og:title" content="<%= locals.title != null ? title : 'Discord Templates' %>">
-<meta property="og:description"
-      content="<%= locals.description != null ? description : 'Discord Templates - Discover a huge variety of Discord server templates for all purposes.' %>">
-<meta property="og:image"
-      content="<%= locals.image != null ? image : 'https://discordtemplates.me/static/img/icon.png' %>">
+<meta property="og:description" content="<%= locals.description != null ? description :
+        'Discord Templates - Discover a huge variety of Discord server templates for all purposes.' %>">
+<meta property="og:image" content="<%= locals.image != null ? image : 'https://discordtemplates.me/icon.png' %>">
+<meta property="twitter:card" content="summary">
+<meta property="twitter:title" content="<%= locals.title != null ? title : 'Discord Templates' %>">
+<meta property="twitter:description" content="<%= locals.description != null ? description :
+        'Discord Templates - Discover a huge variety of Discord server templates for all purposes.' %>">
+<meta property="twitter:image" content="<%= locals.image != null ? image : 'https://discordtemplates.me/icon.png' %>">
 <title><%= locals.title != null ? title + ' | ' : '' %>Discord Templates</title>
-<link rel="icon" href="/static/img/icon.png" type="image/png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-<link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="/static/fonts/fontawesome-all.min.css" type="text/css">
-<script data-ad-client="ca-pub-6223195383839601" async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129600306-4"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" href="/assets/bootstrap.min.css" type="text/css">
+<script async src="https://s.nitropay.com/ads-854.js" data-log-level="warn"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'UA-129600306-4');
+    window['nitroAds'] = window['nitroAds'] || {
+        createAd: function() {
+            window.nitroAds.queue.push(['createAd', arguments]);
+        },
+        queue: []
+    };
 </script>
 <style>
     body {
@@ -44,26 +43,37 @@
         margin-left: 15%;
     }
 
+    .main-content {
+        min-height: calc(100vh - 66px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .icon {
+        height: 1em;
+        width: 1.5em;
+        margin-top: -0.15em;
+    }
+
+    .icon-sm {
+        height: 0.875em;
+        width: 1.3125em;
+    }
+
+    .icon-lg {
+        height: 2em;
+        width: 3em;
+    }
+
     .no-arrow:after {
         display: none;
-    }
-
-    .navbar-dark {
-        background-color: #23272a;
-    }
-
-    .template-section {
-        padding: 20px 5%;
     }
 
     .btn-pill {
         border-radius: 100px;
         padding-left: 1em;
         padding-right: 1em;
-    }
-
-    .text-grey {
-        color: grey;
     }
 
     .form-control-dark, .form-control-dark:focus {
@@ -125,6 +135,10 @@
 
     #scroll-button:hover {
         text-decoration: none;
+    }
+
+    #scroll-button img {
+        margin-left: 8px;
     }
 
     #particles-js {

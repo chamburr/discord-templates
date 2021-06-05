@@ -6,12 +6,12 @@
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
-    <div class="container my-4">
+    <div class="container mt-5 mb-4">
         <div class="align-items-center mb-4">
-            <h3>Tag</h3>
-            <h5>Browse templates by tag.</h5>
+            <h1>Tag</h1>
+            <h2 class="h5">Browse templates by tag.</h2>
         </div>
         <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
            href="/tags/community">Community</a>
@@ -35,12 +35,12 @@
            href="/tags/learning">Learning</a>
         <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
            href="/tags/support">Support</a>
-        <%- include('partials/ad', {crawler: crawler}) %>
+        <%- include('partials/ad', {name: 'placement-1'}) %>
         <div class="row mt-4">
             <% if (templates.length === 0) { %>
                 <div class="col text-center">
-                    <h5 class="display-3">:(</h5>
-                    <h5 class="mt-4">No result found.</h5>
+                    <p class="display-3">:(</p>
+                    <p class="h5 mt-4">No result found.</p>
                 </div>
             <% } else { %>
                 <% for (let element of templates) { %>
@@ -57,7 +57,7 @@
                href="/tags/<%= tag %>?&page=<%= page + 1 %>">Next</a>
         </div>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
 </body>

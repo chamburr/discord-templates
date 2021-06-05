@@ -2,156 +2,149 @@
 <html lang="en">
 
 <head>
-    <%- include('partials/head', {title: template.name, description: template.description, image: template.serialized_source_guild.icon_hash == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/icons/${template.source_guild_id}/${template.serialized_source_guild.icon_hash}.png`}) %>
+    <%- include('partials/head', {title: template.name, description: template.description}) %>
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
-    <div class="container my-4">
+    <div class="container mt-5 mb-4">
         <div class="align-items-center mb-4">
-            <h3>Template</h3>
+            <h1>Template</h1>
         </div>
-        <div class="card shadow py-2 bg-dark">
+        <div class="card shadow px-4 py-2 bg-dark">
             <div class="card-body">
-                <div class="row">
-                    <div class="col col-lg-1"></div>
-                    <div class="col-12 col-lg-3 text-center">
-                        <img src="<%= template.serialized_source_guild.icon_hash == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/icons/${template.source_guild_id}/${template.serialized_source_guild.icon_hash}.png` %>"
-                             class="card-img rounded-circle" style="height: 220px; width: 220px;" alt="Icon">
-                    </div>
-                    <div class="col-12 col-lg-7 pl-4 my-auto text-center text-lg-left pt-4 pt-lg-0">
-                        <h3 class="card-title mb-1"><%= template.name %></h3>
-                        <h4>
-                            <span class="badge badge-success font-weight-normal mt-2">
-                                <%= template.usage_count %> uses
-                            </span>
-                            <% for (let element of template.tags) { %>
-                                <% if (element != null) { %>
-                                    <span class="badge badge-info font-weight-normal mt-2">
-                                        <%= element.charAt(0).toUpperCase() + element.slice(1) %>
-                                    </span>
-                                <% } %>
-                            <% } %>
-                            <a role="button" class="btn btn-secondary btn-sm btn-pill align-top p-0 mt-2"
-                               style="font-size: 1rem; line-height: 1rem;" href="/users/<%= template.creator.id %>">
-                                <img src="https://cdn.discordapp.com/avatars/<%= template.creator.id %>/<%= template.creator.avatar %>.png?size=64"
-                                     class="card-img rounded-circle" style="height: 27px; width: 27px;" alt="Avatar">
-                                <span class="my-auto align-middle pr-2">
-                                    Creator: <%= template.creator.username %>#<%= template.creator.discriminator %>
+                <div class="my-auto text-center text-lg-left">
+                    <p class="h2 card-title mb-1"><%= template.name %></p>
+                    <p class="card-text mb-1"><%= template.description %></p>
+                    <p class="h5">
+                        <span class="badge badge-success font-weight-normal mt-2 mr-1">
+                            <%= template.usage_count %> uses
+                        </span>
+                        <% for (let element of template.tags) { %>
+                            <% if (element != null) { %>
+                                <span class="badge badge-info font-weight-normal mt-2 mr-1">
+                                    <%= element.charAt(0).toUpperCase() + element.slice(1) %>
                                 </span>
-                            </a>
-                        </h4>
-                        <p class="card-text mb-1"><%= template.description %></p>
-                        <div>
-                            <% if (locals.user != null) { %>
-                                <a role="button" class="btn btn-primary mt-2" target="_blank"
-                                   href="/templates/<%= template.source_guild_id %>/use">Use Template</a>
-                            <% } else { %>
-                                <button class="btn btn-primary mt-2" type="button" data-toggle="modal"
-                                        data-target="#login-modal">
-                                    Use Template
-                                </button>
-                                <div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-                                     aria-labelledby="login-modal-label" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content bg-dark">
-                                            <div class="modal-header border-secondary">
-                                                <h5 class="modal-title" id="login-modal-label">Login Required</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true" class="text-white"
-                                                          style="text-shadow: none;">&times;</span>
-                                                </button>
+                            <% } %>
+                        <% } %>
+                        <a role="button" class="btn btn-secondary btn-sm btn-pill align-top p-0 mt-2"
+                           style="font-size: 75%; line-height: 75%;" href="/users/<%= template.creator.id %>">
+                            <img src="https://cdn.discordapp.com/avatars/<%= template.creator.id %>/<%=
+                                 template.creator.avatar %>.png?size=64"
+                                 class="card-img rounded-circle" style="height: 21px; width: 21px;" alt="Avatar">
+                            <span class="my-auto align-middle pr-2">
+                                Creator: <%= template.creator.username %>#<%= template.creator.discriminator %>
+                            </span>
+                        </a>
+                    </p>
+                    <div>
+                        <% if (locals.user != null) { %>
+                            <a role="button" class="btn btn-primary mt-2" target="_blank"
+                               href="/templates/<%= template.source_guild_id %>/use">Use Template</a>
+                        <% } else { %>
+                            <button class="btn btn-primary mt-2" type="button" data-toggle="modal"
+                                    data-target="#login-modal">
+                                Use Template
+                            </button>
+                            <div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
+                                 aria-labelledby="login-modal-label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header border-secondary">
+                                            <p class="h5 modal-title" id="login-modal-label">Login Required</p>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true" class="text-white"
+                                                      style="text-shadow: none;">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Before you can use the server template, please login to our website.
+                                            <div class="custom-control custom-checkbox mt-2">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       id="login-modal-check" checked>
+                                                <label class="custom-control-label" for="login-modal-check">
+                                                    Join our official Discord server
+                                                </label>
                                             </div>
-                                            <div class="modal-body">
-                                                Before you can use the server template, please login to our website.
-                                                <div class="custom-control custom-checkbox mt-2">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="login-modal-check" checked>
-                                                    <label class="custom-control-label" for="login-modal-check">
-                                                        Join our official Discord server
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer border-secondary">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                    Cancel
-                                                </button>
-                                                <a role="button" class="btn btn-primary" target="_blank"
-                                                   href="<%= redirectUri %>" id="login-modal-button-with-join">
-                                                    Login
-                                                </a>
-                                                <a role="button" class="btn btn-primary" target="_blank"
-                                                   href="<%= redirectUri.replace('%20guilds.join', '') %>"
-                                                   id="login-modal-button">
-                                                    Login
-                                                </a>
-                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-secondary">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                            <a role="button" class="btn btn-primary" target="_blank"
+                                               href="<%= redirectUri %>" id="login-modal-button-with-join">
+                                                Login
+                                            </a>
+                                            <a role="button" class="btn btn-primary" target="_blank"
+                                               href="<%= redirectUri.replace('%20guilds.join', '') %>"
+                                               id="login-modal-button">
+                                                Login
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            <% } %>
-                            <% if (locals.user != null && (user.admin === true || user.id == template.creator_id)) { %>
-                                <a role="button" class="btn btn-secondary ml-1 mt-2"
-                                   href="/templates/<%= template.source_guild_id %>/edit">Edit</a>
-                                <button class="btn btn-danger ml-1 mt-2" type="button" data-toggle="modal"
-                                        data-target="#delete-modal">
-                                    Delete
-                                </button>
-                                <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
-                                     aria-labelledby="delete-modal-label" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content bg-dark">
-                                            <div class="modal-header border-secondary">
-                                                <h5 class="modal-title" id="delete-modal-label">Delete Template</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true" class="text-white"
-                                                          style="text-shadow: none;">&times;</span>
+                            </div>
+                        <% } %>
+                        <% if (locals.user != null && (user.admin === true || user.id == template.creator_id)) { %>
+                            <a role="button" class="btn btn-secondary ml-1 mt-2"
+                               href="/templates/<%= template.source_guild_id %>/edit">Edit</a>
+                            <button class="btn btn-danger ml-1 mt-2" type="button" data-toggle="modal"
+                                    data-target="#delete-modal">
+                                Delete
+                            </button>
+                            <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
+                                 aria-labelledby="delete-modal-label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header border-secondary">
+                                            <p class="h5 modal-title" id="delete-modal-label">Delete Template</p>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true" class="text-white"
+                                                      style="text-shadow: none;">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this template?
+                                        </div>
+                                        <div class="modal-footer border-secondary">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                            <form action="/templates/<%= template.source_guild_id %>/delete"
+                                                  method="post">
+                                                <button type="submit" class="btn btn-danger">
+                                                    Confirm
                                                 </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete this template?
-                                            </div>
-                                            <div class="modal-footer border-secondary">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                    Cancel
-                                                </button>
-                                                <form action="/templates/<%= template.source_guild_id %>/delete"
-                                                      method="post">
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Confirm
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            <% } %>
-                        </div>
+                            </div>
+                        <% } %>
                     </div>
-                    <div class="col col-lg-1"></div>
                 </div>
             </div>
         </div>
-        <%- include('partials/ad', {crawler: crawler}) %>
-        <h4 class="mt-5 mb-4">Details</h4>
+        <%- include('partials/ad', {name: 'placement-1'}) %>
+        <h2 class="h3 mt-5 mb-4">Details</h2>
         <div class="card shadow py-2 bg-dark">
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <h3 class="card-title mb-1">Channels</h3>
-                        <h4>
+                        <p class="h4 card-title mb-1">Channels</p>
+                        <div class="h4">
                             <% let category = false; %>
                             <% for (let element of template.serialized_source_guild.channels) { %>
-
                                 <% if (element.type === 4) { %>
                                     <% category = true; %>
                                     <button type="button" class="btn btn-sm text-white d-block">
                                         <svg width="24" height="24" style="color: lightgrey;">
                                             <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M16.59 8.59004L12 13.17L7.41 8.59004L6 10L12 16L18 10L16.59 8.59004Z"></path>
+                                                  d="M16.59 8.59004L12 13.17L7.41 8.59004L6 10L12 16L18 10L16.59
+                                                  8.59004Z"></path>
                                         </svg>
                                         <span class="text-uppercase align-middle font-weight-bold"
                                               style="color: lightgrey;"><%= element.name %></span>
@@ -159,32 +152,61 @@
                                 <% } else if (element.type === 2) { %>
                                     <button type="button" class="btn btn-sm text-white d-block"
                                             data-toggle="tooltip" data-placement="right"
-                                            title="Bitrate: <%= element.bitrate / 1000 %>kbps&#013;&#010;User limit: <%= element.user_limit === 0 ? 'Infinity' : element.user_limit %>">
+                                            title="Bitrate: <%= element.bitrate / 1000 %>kbps
+                                            User limit: <%= element.user_limit === 0 ? 'Infinity' :
+                                            element.user_limit %>">
                                         <svg class="<%= category === true ? ' ml-4' : '' %>" width="24" height="24"
                                              style="color: lightgrey;">
                                             <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M11.383 3.07904C11.009 2.92504 10.579 3.01004 10.293 3.29604L6 8.00204H3C2.45 8.00204 2 8.45304 2 9.00204V15.002C2 15.552 2.45 16.002 3 16.002H6L10.293 20.71C10.579 20.996 11.009 21.082 11.383 20.927C11.757 20.772 12 20.407 12 20.002V4.00204C12 3.59904 11.757 3.23204 11.383 3.07904ZM14 5.00195V7.00195C16.757 7.00195 19 9.24595 19 12.002C19 14.759 16.757 17.002 14 17.002V19.002C17.86 19.002 21 15.863 21 12.002C21 8.14295 17.86 5.00195 14 5.00195ZM14 9.00195C15.654 9.00195 17 10.349 17 12.002C17 13.657 15.654 15.002 14 15.002V13.002C14.551 13.002 15 12.553 15 12.002C15 11.451 14.551 11.002 14 11.002V9.00195Z"></path>
+                                                  d="M11.383 3.07904C11.009 2.92504 10.579 3.01004 10.293 3.29604L6
+                                                  8.00204H3C2.45 8.00204 2 8.45304 2 9.00204V15.002C2 15.552 2.45 16.002
+                                                  3 16.002H6L10.293 20.71C10.579 20.996 11.009 21.082 11.383
+                                                  20.927C11.757 20.772 12 20.407 12 20.002V4.00204C12 3.59904 11.757
+                                                  3.23204 11.383 3.07904ZM14 5.00195V7.00195C16.757 7.00195 19 9.24595
+                                                  19 12.002C19 14.759 16.757 17.002 14 17.002V19.002C17.86 19.002 21
+                                                  15.863 21 12.002C21 8.14295 17.86 5.00195 14 5.00195ZM14
+                                                  9.00195C15.654 9.00195 17 10.349 17 12.002C17 13.657 15.654 15.002 14
+                                                  15.002V13.002C14.551 13.002 15 12.553 15 12.002C15 11.451 14.551
+                                                  11.002 14 11.002V9.00195Z"></path>
                                         </svg>
                                         <span class="align-middle"><%= element.name %></span>
                                     </button>
                                 <% } else { %>
                                     <button type="button" class="btn btn-sm text-white d-block"
                                             data-toggle="tooltip" data-placement="right"
-                                            title="Topic: <%= element.topic != null ? element.topic : 'None' %>&#013;&#010;Slowmode: <%= element.rate_limit_per_user === 0 ? 'Off' : element.rate_limit_per_user + ' seconds' %>&#013;&#010;NSFW: <%= element.nsfw %>">
+                                            title="Topic: <%= element.topic != null ? element.topic : 'None' %>
+                                            Slowmode: <%= element.rate_limit_per_user === 0 ? 'Off' :
+                                            element.rate_limit_per_user + ' seconds' %>
+                                            NSFW: <%= element.nsfw %>">
                                         <svg class="<%= category === true ? ' ml-4' : '' %>" width="24" height="24"
                                              style="color: lightgrey;">
                                             <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"></path>
+                                                  d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001
+                                                  17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759
+                                                  15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001
+                                                  9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759
+                                                  7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677
+                                                  3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201
+                                                  3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391
+                                                  3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657
+                                                  3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574
+                                                  7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899
+                                                  9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474
+                                                  15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799
+                                                  17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709
+                                                  21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14
+                                                  17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094
+                                                  21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"></path>
                                         </svg>
                                         <span class="align-middle"><%= element.name %></span>
                                     </button>
                                 <% } %>
                             <% } %>
-                        </h4>
+                        </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <h3 class="card-title mb-1">Roles</h3>
-                        <h4>
+                        <p class="h4 card-title mb-1 mt-4 mt-md-0">Roles</p>
+                        <div class="h4">
                             <% for (let element of template.serialized_source_guild.roles) { %>
                                 <% let color = ("000000" + element.color.toString(16)).slice(-6); %>
                                 <% let originalColor = color; %>
@@ -192,23 +214,26 @@
                                 <button type="button" class="btn btn-sm btn-pill text-white py-0 pl-1 pr-2 my-1"
                                         style="border-color: #<%= color %>;" data-toggle="tooltip"
                                         data-placement="right"
-                                        title="Colour: #<%= originalColor %>&#013;&#010;Hoisted: <%= element.hoist %>&#013;&#010;Mentionable: <%= element.mentionable %>">
+                                        title="Colour: #<%= originalColor %>&#013;&#010;Hoisted: <%= element.hoist %>
+                                        Mentionable: <%= element.mentionable %>">
                                     <div class="d-inline-block"
-                                         style="vertical-align: middle; height: 0.8rem; width: 0.8rem; margin: 1px 0 4px 0; background-color: #<%= color %>;  border-radius: 10px;"></div>
+                                         style="vertical-align: middle; height: 0.8rem; width: 0.8rem;
+                                         margin: 1px 0 4px 0; background-color: #<%= color %>;
+                                         border-radius: 10px;"></div>
                                     <%= element.name %>
                                 </button>
                             <% } %>
-                        </h4>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-center text-muted">
+            <div class="card-footer text-center text-light">
                 Tip: <span class="d-none d-md-inline">Hover over</span><span class="d-md-none">Long press</span> a
                 channel or role name to see details.
             </div>
         </div>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
 <script>

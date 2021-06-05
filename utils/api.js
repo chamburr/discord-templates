@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const Eris = require('eris');
+
 const config = require('../config.json');
 
 const bot = new Eris(`Bot ${config.botToken}`, {
@@ -28,7 +29,7 @@ async function fetchTemplate(id) {
     try {
         return await request({
             method: 'GET',
-            uri: `https://discordapp.com/api/v6/guilds/templates/${id}`,
+            uri: `https://discordapp.com/api/v9/guilds/templates/${id}`,
             headers: {
                 'User-Agent': 'DiscordBot (custom, 1.0.0)'
             },
@@ -36,6 +37,7 @@ async function fetchTemplate(id) {
         });
     } catch (err) {
         if (err.statusCode === 404) return false;
+        if (err.statusCode === 400) return false;
         console.error(err.stack);
     }
 }

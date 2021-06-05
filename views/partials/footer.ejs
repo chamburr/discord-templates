@@ -1,15 +1,20 @@
 <div>
-    <a href="#" id="scroll-button">
-        <i class="fas fa-chevron-up fa-2x text-white"></i>
+    <a href="#" id="scroll-button" class="align-items-center">
+        <img src="/icons/chevron-up.svg" alt="Chevron up" class="icon icon-lg">
     </a>
 </div>
-<%- include('ad', {crawler: crawler}) %>
-<footer class="footer pt-2 pb-4">
-    <div class="copyright text-center">
-        Copyright &copy; 2020-2021 <a href="https://chamburr.xyz" target="_blank" class="text-white">CHamburr</a>
-    </div>
-    <div class="text-center mt-2">
-        <a class="text-muted" href="/terms">Terms of Service</a>
-        <a class="text-muted ml-2" href="/privacy">Privacy Policy</a>
-    </div>
-</footer>
+<div>
+    <%- include('ad', {name: 'placement-4'}) %>
+    <footer class="footer pt-4 pb-4">
+        <div class="copyright text-center">
+            Copyright &copy; 2020-2021 <a href="https://chamburr.xyz" target="_blank" rel="noopener" class="text-white">
+                CHamburr
+            </a>
+        </div>
+        <div class="text-center mt-2">
+            <a class="text-muted" href="/terms">Terms of Service</a>
+            <a class="text-muted ml-2" href="/privacy">Privacy Policy</a>
+            <span class="d-block" data-ccpa-link="1"></span>
+        </div>
+    </footer>
+</div>

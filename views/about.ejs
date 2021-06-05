@@ -6,28 +6,29 @@
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
-    <div class="container my-4">
+    <div class="container mt-5 mb-4">
         <div class="align-items-center mb-4">
-            <h3>About</h3>
+            <h1>About</h1>
+            <h2 class="h5">Information about our website and its contributors.</h2>
         </div>
         <p>
-            Discord Templates is the largest server template list ever, with over 500 valid server templates! You
-            can discover a huge variety of server templates on this website, for all the purposes you need.
+            Discord Templates is the largest server template list ever, with over 500 valid server templates! You can
+            discover a huge variety of server templates on this website, for all the purposes you need.
         </p>
         <p>
-            This website was founded in April 2020, shortly after the release of the server templates functionality.
-            The templates here are completely created and maintained by the community. Big thanks to everyone!
+            This website was founded in April 2020, shortly after the release of the server templates functionality. The
+            templates here are completely created and maintained by the community. Big thanks to everyone!
         </p>
-        <h4>What are server templates?</h4>
+        <h2 class="h3 mt-4">What are server templates?</h2>
         <p>
             Server template is a new Discord feature released in April 2020. It will let you clone categories, channels,
             roles and permissions to help you set up a new server quickly. For more information on server templates,
             please check out
             <a href="https://support.discordapp.com/hc/en-us/articles/360041033511-Server-Templates">this link</a>.
         </p>
-        <h4>Contributors</h4>
+        <h2 class="h3 mt-4">Contributors</h2>
         <p>
             These people are most certainly awesome. Without them, Discord Templates would not be possible!
         </p>
@@ -41,28 +42,10 @@
                         </div>
                         <div class="col col-12 col-lg-8">
                             <div class="card-body">
-                                <h5 class="card-title">CHamburr</h5>
+                                <p class="h5 card-title">CHamburr</p>
                                 <p>Developer</p>
                                 <p>Administrator</p>
                                 <a class="btn btn-secondary" href="/users/446290930723717120">View Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-lg-6">
-                <div class="card bg-dark my-2">
-                    <div class="row no-gutters">
-                        <div class="col col-12 col-lg-4 my-4 my-lg-auto px-4 pr-lg-0 text-center">
-                            <img src="https://cdn.discordapp.com/avatars/723794074498367498/a_04ef2c02bd3341e42bda2ec5d6d2dcd2.gif?size=256"
-                                 class="card-img" alt="Icon" style="max-height: 150px; max-width: 150px;">
-                        </div>
-                        <div class="col col-12 col-lg-8">
-                            <div class="card-body">
-                                <h5 class="card-title">waterflamev8</h5>
-                                <p>Administrator</p>
-                                <p>&#8203;</p>
-                                <a class="btn btn-secondary" href="/users/723794074498367498">View Profile</a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +60,7 @@
                         </div>
                         <div class="col col-12 col-lg-8">
                             <div class="card-body">
-                                <h5 class="card-title">◁ѕυρєяиσνα▷</h5>
+                                <p class="h5 card-title">◁ѕυρєяиσνα▷</p>
                                 <p>Moderator</p>
                                 <p>&#8203;</p>
                                 <a class="btn btn-secondary" href="/users/495759280469835780">View Profile</a>
@@ -88,7 +71,7 @@
             </div>
         </div>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
 </body>

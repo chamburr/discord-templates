@@ -1,5 +1,5 @@
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/jquery.min.js"></script>
+<script src="/assets/bootstrap.min.js"></script>
 <script>
     window.addEventListener('load', function () {
         var forms = document.getElementsByClassName('needs-validation');
@@ -13,6 +13,7 @@
             }, false);
         });
     }, false);
+
     $(window).scroll(function () {
         if ($(window).scrollTop() > 300) {
             $('#scroll-button').addClass('show');
@@ -20,11 +21,50 @@
             $('#scroll-button').removeClass('show');
         }
     });
+
     $(document).ready(function () {
         $('#scroll-button').on('click', function (event) {
             event.preventDefault();
             $('html, body').animate({scrollTop: 0}, 300);
         });
     });
+
     $('[data-toggle="tooltip"]').tooltip();
+
+    if (window['nitroAds'] && window['nitroAds'].loaded) {
+        if ($('#consent-box')) {
+            $('#consent-box').css('display', window['__tcfapi'] ? '' : 'none')
+        }
+    } else {
+        document.addEventListener('nitroAds.loaded', function () {
+            if ($('#consent-box')) {
+                $('#consent-box').css('display', window['__tcfapi'] ? '' : 'none')
+            }
+        });
+    }
+
+    $('.ad').each(function () {
+        window['nitroAds'].createAd($(this).attr('id'), {
+            demo: true,
+            format: 'display',
+            refreshLimit: 10,
+            refreshTime: 30,
+            report: {
+                enabled: true,
+                wording: 'Report Ad',
+                position: 'bottom-right'
+            },
+            sizes: [
+                [728, 90],
+                [970, 90],
+                [320, 50],
+            ]
+        });
+    })
+
+    window['nitroAds'].createAd('top-anchor', {
+        demo: true,
+        format: 'anchor',
+        anchor: 'bottom'
+    });
 </script>

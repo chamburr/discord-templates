@@ -6,18 +6,18 @@
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
-    <div class="container my-4">
+    <div class="container mt-5 mb-4">
         <div class="align-items-center text-center mb-4">
-            <h3 class="mb-0 display-1"><%= heading %></h3>
-            <h3 class="mb-0 display-4"><%= title %></h3>
+            <h1 class="mb-0 display-1"><%= heading %></h1>
+            <h1 class="mb-0 display-4"><%= title %></h1>
             <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-6">
                         <div class="card bg-dark shadow py-4">
                             <div class="card-header bg-transparent border-0">
-                                <h4 class="text-center"><%= description %></h4>
+                                <p class="h4 text-center"><%= description %></p>
                             </div>
                             <div class="card-body text-center">
                                 <% if (locals.buttonText != null) { %>
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
 </body>

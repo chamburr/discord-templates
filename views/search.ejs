@@ -6,12 +6,12 @@
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
-    <div class="container my-4">
+    <div class="container mt-5 mb-4">
         <div class="align-items-center mb-4">
-            <h3>Search</h3>
-            <h5>Search templates by name.</h5>
+            <h1>Search</h1>
+            <h2 class="h5">Search templates by name.</h2>
         </div>
         <form class=" mt-4 needs-validation" method="get" action="/search" novalidate>
             <div class="form-group ml-0 mr-3">
@@ -25,12 +25,12 @@
                 </div>
             </div>
         </form>
-        <%- include('partials/ad', {crawler: crawler}) %>
+        <%- include('partials/ad', {name: 'placement-1'}) %>
         <div class="row mt-4">
             <% if (templates.length === 0) { %>
                 <div class="col text-center">
-                    <h5 class="display-3">:(</h5>
-                    <h5 class="mt-4">No result found.</h5>
+                    <p class="display-3">:(</p>
+                    <p class="h5 mt-4">No result found.</p>
                 </div>
             <% } else { %>
                 <% for (let element of templates) { %>
@@ -47,7 +47,7 @@
                href="/search?q=<%= query %>&page=<%= page + 1 %>">Next</a>
         </div>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
 </body>

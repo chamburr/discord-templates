@@ -1,20 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #23272a;">
     <div class="container px-4 mw-100">
         <a href="/" class="navbar-brand h1 mb-0 p-0">
-            <img src="/static/img/icon.png" height="50" width="50" alt="Discord Templates Icon">
+            <img src="/icon.png" height="50" width="50" alt="Discord Templates icon">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
                 aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar-content" style="font-weight: 500;">
+        <div class="collapse navbar-collapse my-2 my-md-0" id="navbar-content" style="font-weight: 500;">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" target="_blank" href="https://discords.com">Discord Server
-                        List</a>
+                    <a class="nav-link text-light" target="_blank" href="https://discords.com" rel="noopener">
+                        Discord Server List
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/about">About</a>
@@ -25,38 +26,31 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/discord">Support</a>
                 </li>
-                </li>
             </ul>
             <% if (locals.user != null) { %>
-                <div class="navbar-nav dropdown">
+                <div class="navbar-nav dropdown mt-2 mt-md-0">
                     <a class="dropdown-toggle nav-link no-arrow text-light py-0" data-toggle="dropdown"
                        aria-expanded="false" href="/users/<%= user.id %>">
                         <span class="d-none d-lg-inline mr-1"><%= user.username %></span>
-                        <i class="d-none d-lg-inline-block fas fa-caret-down mr-2"></i>
+                        <img src="/icons/caret-down.svg" alt="Caret down" class="icon d-none d-lg-inline-block mr-2">
                         <img class="d-none d-lg-inline rounded-circle img-profile" height="50" width="50"
                              src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png">
                         <img class="d-inline d-lg-none rounded-circle img-profile" height="40" width="40"
                              src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png">
                         <span class="d-inline d-lg-none mx-1"><%= user.username %></span>
-                        <i class="d-inline d-lg-none fas fa-caret-down"></i>
+                        <img src="/icons/caret-down.svg" alt="Caret down" class="icon d-inline d-lg-none">
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        <a class="dropdown-item" role="presentation" href="/users/<%= user.id %>">
-                            <i class="fas fa-user fa-sm fa-fw mr-2"></i>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark mt-2 mt-md-0" role="menu">
+                        <a class="dropdown-item text-white bg-dark" role="presentation" href="/users/<%= user.id %>">
+                            <img src="/icons/user.svg" alt="User" class="icon icon-sm">
                             Profile
                         </a>
-                        <a class="dropdown-item" role="presentation" href="/templates/new">
-                            <i class="fas fa-plus fa-sm fa-fw mr-2"></i>
+                        <a class="dropdown-item text-white bg-dark" role="presentation" href="/templates/new">
+                            <img src="/icons/plus.svg" alt="Plus" class="icon icon-sm">
                             Add Template
                         </a>
-                        <% if (user.admin === true) { %>
-                            <a class="dropdown-item" role="presentation" href="/admin">
-                                <i class="fas fa-chart-pie fa-sm fa-fw mr-2"></i>
-                                Admin Panel
-                            </a>
-                        <% } %>
-                        <a class="dropdown-item" role="presentation" href="/logout">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+                        <a class="dropdown-item text-white bg-dark" role="presentation" href="/logout">
+                            <img src="/icons/sign-out-alt.svg" alt="Sign out alt" class="icon icon-sm">
                             Logout
                         </a>
                     </div>

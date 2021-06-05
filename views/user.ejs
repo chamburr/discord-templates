@@ -2,36 +2,40 @@
 <html lang="en">
 
 <head>
-    <%- include('partials/head', {title: profile.username + '#' + profile.discriminator, description: '', image: profile.avatar == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=256`}) %>
+    <%- include('partials/head', {title: profile.username + '#' + profile.discriminator, description: '',
+    image: profile.avatar == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' :
+    `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=256`}) %>
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
-    <div class="container my-4">
+    <div class="container mt-5 mb-4">
         <div class="align-items-center mb-4">
-            <h3>User Profile</h3>
+            <h1>User Profile</h1>
         </div>
         <div class="card shadow py-2 bg-dark">
             <div class="card-body">
                 <div class="row">
                     <div class="col col-lg-1"></div>
                     <div class="col-12 col-lg-3 text-center">
-                        <img src="<%= profile.avatar == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' : `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=256` %>"
+                        <img src="<%= profile.avatar == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' :
+                                `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=256` %>"
                              class="card-img rounded-circle" style="height: 220px; width: 220px;" alt="Avatar">
                     </div>
                     <div class="col-12 col-lg-7 pl-4 my-auto text-center text-lg-left pt-4 pt-lg-0">
-                        <h3 class="card-title"><%= profile.username %>#<%= profile.discriminator %></h3>
-                        <h4>
+                        <p class="h3 card-title"><%= profile.username %>#<%= profile.discriminator %></p>
+                        <div class="h4">
                             <span class="badge badge-primary font-weight-normal">
                                 <%= templates.length %> templates listed
                             </span>
-                        </h4>
-                        <h4>
+                        </div>
+                        <div class="h4">
                             <span class="badge badge-success font-weight-normal">
-                                Templates used <%= templates.map(element => element.usage).reduce((a, b) => a + b, 0) %> times
+                                Templates used <%= templates.map(element => element.usage).reduce((a, b) => a + b, 0) %>
+                                times
                             </span>
-                        </h4>
+                        </div>
                         <p class="card-text">
                             <em>Joined <%= moment(parseInt(profile.joined)).fromNow() %></em>
                         </p>
@@ -40,13 +44,13 @@
                 </div>
             </div>
         </div>
-        <%- include('partials/ad', {crawler: crawler}) %>
-        <h4 class="mt-5 mb-4">Templates</h4>
+        <%- include('partials/ad', {name: 'placement-1'}) %>
+        <h2 class="h3 mt-5 mb-4">Templates</h2>
         <div class="row">
             <% if (templates.length === 0) { %>
                 <div class="col text-center">
-                    <h5 class="display-3">:(</h5>
-                    <h5 class="mt-4">No result found.</h5>
+                    <p class="display-3">:(</p>
+                    <p class="h5 mt-4">No result found.</p>
                 </div>
             <% } else { %>
                 <% for (let element of templates) { %>
@@ -57,7 +61,7 @@
             <% } %>
         </div>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
 </body>

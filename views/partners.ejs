@@ -6,34 +6,14 @@
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
-    <div class="container my-4">
+    <div class="container mt-5 mb-4">
         <div class="align-items-center mb-4">
-            <h3>Partners</h3>
-            <h5>These are the awesome thing we are partnering with.</h5>
+            <h1>Partners</h1>
+            <h2 class="h5">These are the awesome thing we are partnering with.</h2>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-6 mb-2">
-                <div class="card bg-dark my-2">
-                    <div class="row no-gutters">
-                        <div class="col-12 col-md-4 my-4 my-md-auto px-4 pr-md-0 text-center">
-                            <img src="https://cdn.discordapp.com/avatars/628563240187723786/06a8639ec4e75387c26de267cc277df1.png?size=256"
-                                 class="card-img" alt="Icon" style="max-height: 150px; max-width: 150px;">
-                        </div>
-                        <div class="col-12 col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Wyvor</h5>
-                                <p>
-                                    The best feature-rich Discord music bot. Take control over your music with an
-                                    intuitive dashboard, custom effects and more!
-                                </p>
-                                <a class="btn btn-secondary" target="_blank" href="https://wyvor.xyz">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-12 col-lg-6 mb-2">
                 <div class="card bg-dark my-2">
                     <div class="row no-gutters">
@@ -43,7 +23,7 @@
                         </div>
                         <div class="col-12 col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">ModMail</h5>
+                                <p class="h5 card-title">ModMail</p>
                                 <p>
                                     ModMail is a feature-rich Discord bot designed to enable your server members to
                                     contact staff easily.
@@ -63,13 +43,14 @@
                         </div>
                         <div class="col col-12 col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Member Count</h5>
+                                <p class="h5 card-title">Member Count</p>
                                 <p>
                                     A counting bot that displays server statistics with fancy counters, making it
                                     aesthetically pleasing for everyone.
                                 </p>
-                                <a class="btn btn-secondary" target="_blank" href="https://membercount.net">Learn
-                                    More</a>
+                                <a class="btn btn-secondary" target="_blank" href="https://membercount.net">
+                                    Learn More
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +63,7 @@
             Contact CHamburr#2591 on Discord.
         </p>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
 </body>

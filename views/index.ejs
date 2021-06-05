@@ -6,15 +6,16 @@
 </head>
 
 <body>
+<%- include('partials/navbar', {user: user}) %>
 <div class="main-content">
-    <%- include('partials/navbar', {user: user}) %>
     <div class="d-table overflow-hidden w-100" style="height: calc(100vh - 64px);">
         <div id="particles-js"></div>
         <div class="d-table-cell align-middle">
             <div class="container text-center text-md-left">
                 <h1>Welcome to <br class="d-md-none">Discord Templates!</h1>
-                <h5 class="font-weight-normal">Discover a huge variety of Discord server templates for all
-                    purposes.</h5>
+                <h2 class="h5 font-weight-normal">
+                    Discover a huge variety of Discord server templates for all purposes.
+                </h2>
                 <form class="form-inline d-block d-md-flex mt-4 needs-validation" method="get" action="/search"
                       novalidate>
                     <div class="form-group ml-0">
@@ -30,7 +31,7 @@
                     </div>
                 </form>
                 <div class="mt-4">
-                    <p class="text-grey font-weight-bold">Or browse by tags...</p>
+                    <p class="font-weight-bold text-white-50">Or browse by tags...</p>
                     <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
                        href="/tags/community">Community</a>
                     <a role="button"
@@ -71,8 +72,8 @@
         </div>
     </div>
     <hr>
-    <div class="container template-section">
-        <h3><i class="fa fa-star"></i> Top Templates</h3>
+    <div class="container" style="padding: 20px 5%;">
+        <h3><img src="/icons/star.svg" alt="Star" class="icon"> Top Templates</h3>
         <p>These templates are the most popular!</p>
         <div class="row">
             <% for (let element of top) { %>
@@ -81,11 +82,11 @@
                 </div>
             <% } %>
         </div>
-        <%- include('partials/ad', {crawler: crawler}) %>
+        <%- include('partials/ad', {name: 'placement-1'}) %>
     </div>
     <hr>
-    <div class="container template-section">
-        <h3><i class="fa fa-clock"></i> New Templates</h3>
+    <div class="container" style="padding: 20px 5%;">
+        <h3><img src="/icons/clock.svg" alt="Clock" class="icon"> New Templates</h3>
         <p>These templates are new to the list!</p>
         <div class="row">
             <% for (let element of recent) { %>
@@ -94,11 +95,11 @@
                 </div>
             <% } %>
         </div>
-        <%- include('partials/ad', {crawler: crawler}) %>
+        <%- include('partials/ad', {name: 'placement-2'}) %>
     </div>
     <hr>
-    <div class="container template-section">
-        <h3><i class="fa fa-users"></i> Community</h3>
+    <div class="container" style="padding: 20px 5%;">
+        <h3><img src="/icons/users.svg" alt="Users" class="icon"> Community</h3>
         <p>These templates have the community tag.</p>
         <div class="row">
             <% for (let element of community) { %>
@@ -110,11 +111,11 @@
         <div class="text-center mt-3">
             <a role="button" class="btn btn-primary" href="/tags/community">View More</a>
         </div>
-        <%- include('partials/ad', {crawler: crawler}) %>
+        <%- include('partials/ad', {name: 'placement-3'}) %>
     </div>
     <hr>
-    <div class="container template-section pb-0">
-        <h3><i class="fa fa-gamepad"></i> Gaming</h3>
+    <div class="container pb-0" style="padding: 20px 5%;">
+        <h3><img src="/icons/gamepad.svg" alt="Gamepad" class="icon"> Gaming</h3>
         <p>These templates have the gaming tag.</p>
         <div class="row">
             <% for (let element of gaming) { %>
@@ -127,10 +128,10 @@
             <a role="button" class="btn btn-primary" href="/tags/gaming">View More</a>
         </div>
     </div>
-    <%- include('partials/footer', {crawler: crawler}) %>
+    <%- include('partials/footer') %>
 </div>
 <%- include('partials/foot') %>
-<script src="/static/js/particles.min.js"></script>
+<script src="/assets/particles.min.js"></script>
 <script>
     particlesJS("particles-js", {
         "particles": {
