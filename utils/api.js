@@ -21,7 +21,8 @@ async function fetchUser(id) {
         return await bot.getRESTUser(id);
     } catch (err) {
         if (err.httpStatus === 404) return false;
-        console.log(err.stack);
+        console.error(`User ${id}`);
+        console.error(err.stack);
     }
 }
 
@@ -38,6 +39,7 @@ async function fetchTemplate(id) {
     } catch (err) {
         if (err.statusCode === 404) return false;
         if (err.statusCode === 400) return false;
+        console.error(`Template ${id}`);
         console.error(err.stack);
     }
 }
