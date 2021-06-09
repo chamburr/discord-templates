@@ -668,6 +668,6 @@ app.use((req, res, next) => {
     errors.sendError404(req, res);
 });
 
-app.listen(8000, '0.0.0.0', () => {
-    console.log(`App listening on port 8000.`);
+app.listen(8080, () => {
+    console.log(`App listening on port 8080.`);
 });
