@@ -45,7 +45,6 @@
 
     $('.ad').each(function () {
         window['nitroAds'].createAd($(this).attr('id'), {
-            demo: true,
             format: 'display',
             refreshLimit: 10,
             refreshTime: 30,
@@ -63,7 +62,6 @@
     })
 
     window['nitroAds'].createAd('top-anchor', {
-        demo: true,
         format: 'anchor',
         anchor: 'bottom'
     });
