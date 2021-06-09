@@ -184,7 +184,7 @@ app.locals.moment = require('moment');
 app.set('x-powered-by', false);
 app.set('view engine', 'ejs');
 app.use(timeout(12000));
-app.use('/', express.static('static'));
+app.use(express.static('static'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(authUser);
