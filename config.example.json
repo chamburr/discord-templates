@@ -13,5 +13,6 @@
 
   "jwtToken": "",
 
+  "guildId": "",
   "admin": []
 }
