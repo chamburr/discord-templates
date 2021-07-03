@@ -1,3 +1,4 @@
+<div id="placement-video" style="height: 0; overflow: hidden;"></div>
 <script src="/assets/jquery.min.js"></script>
 <script src="/assets/bootstrap.min.js"></script>
 <script>
@@ -68,5 +69,10 @@
 
     window['nitroAds'].createAd('placement-interstitial', {
         format: 'interstitial'
+    });
+
+    window['nitroAds'].createAd('placement-video', {
+        format: 'video-ac',
+        mediaQuery: '(min-width: 768px)'
     });
 </script>
