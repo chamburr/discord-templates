@@ -47,8 +47,10 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <%- include('partials/card', {template: element}) %>
                     </div>
-                    <% if (index % 3 === 2 && index < 11) { %>
-                        <%- include('partials/ad', {name: `placement-${(index + 4) / 3}`}) %>
+                    <% if (index === 5) { %>
+                        <div class="mb-4">
+                            <%- include('partials/ad', {name: 'placement-2'}) %>
+                        </div>
                     <% } %>
                 <% } %>
             <% } %>
