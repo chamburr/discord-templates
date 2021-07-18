@@ -45,6 +45,20 @@
     }
 
     $('.ad').each(function () {
+        var sizes = [
+            [728, 90],
+            [970, 90],
+            [320, 50],
+        ];
+
+        if ($(this).data('size') == 'rectangle') {
+            sizes = [
+                [300, 600],
+                [300, 250],
+                [320, 50],
+            ];
+        }
+
         window['nitroAds'].createAd($(this).attr('id'), {
             format: 'display',
             refreshLimit: 10,
@@ -54,11 +68,7 @@
                 wording: 'Report Ad',
                 position: 'bottom-right'
             },
-            sizes: [
-                [728, 90],
-                [970, 90],
-                [320, 50],
-            ]
+            sizes: sizes
         });
     })
 
