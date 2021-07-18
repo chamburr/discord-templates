@@ -134,8 +134,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <p class="h4 card-title mb-1">Channels</p>
                         <div class="h4">
+                            <p class="h4 card-title mb-1">Channels</p>
                             <% let category = false; %>
                             <% for (let element of template.serialized_source_guild.channels) { %>
                                 <% if (element.type === 4) { %>
@@ -204,9 +204,9 @@
                             <% } %>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <p class="h4 card-title mb-1 mt-4 mt-md-0">Roles</p>
+                    <div class="col-12 col-md-6 d-flex flex-column-reverse flex-md-column">
                         <div class="h4">
+                            <p class="h4 card-title mb-1 mt-4 mt-md-0">Roles</p>
                             <% for (let element of template.serialized_source_guild.roles) { %>
                                 <% let color = ("000000" + element.color.toString(16)).slice(-6); %>
                                 <% let originalColor = color; %>
