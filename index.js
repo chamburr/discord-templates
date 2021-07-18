@@ -285,7 +285,7 @@ app.get('/logout', checkLogin, async (req, res) => {
 app.get('/', async (req, res) => {
     let data = {
         user: res.locals.user,
-        top: db.prepare('SELECT * FROM template ORDER BY usage DESC LIMIT 12').all(),
+        top: db.prepare('SELECT * FROM template ORDER BY usage DESC LIMIT 6').all(),
         recent: db.prepare('SELECT * FROM template ORDER BY added DESC LIMIT 6').all(),
         community: db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) ORDER BY RANDOM() DESC LIMIT 6')
             .all('community', 'community'),
