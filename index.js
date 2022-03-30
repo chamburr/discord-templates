@@ -457,9 +457,9 @@ app.post('/templates/new', checkLogin, async (req, res) => {
 
     if (template.description == null) template.description = '';
 
-    db.prepare('INSERT INTO template VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
-        .run(template.code,template.name, template.description, template.usage_count, template.creator_id,
-            req.body.tag1, req.body.tag2, Date.now().toString());
+    db.prepare('INSERT INTO template VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
+        .run(template.code, template.name, template.description, template.usage_count, template.creator_id,
+            template.source_guild_id, req.body.tag1, req.body.tag2, Date.now().toString());
 
     return errors
         .sendCustom(req, res, 'OK', 'Template Added', 'The template was added successfully. Thanks!',
