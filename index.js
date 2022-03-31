@@ -168,6 +168,7 @@ async function checkTemplate(req, res, next) {
 
     let template2 = await api.fetchTemplate(template.id);
     if (template2 === false) return errors.sendError(req, res, 'This template was deleted.');
+    if (template2 == null) return errors.sendError500(req, res);
 
     res.locals.template = {
         tags: [template.tag1, template.tag2],
