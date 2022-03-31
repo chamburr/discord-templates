@@ -567,12 +567,13 @@ app.post('/templates/:id/delete', checkLogin, checkTemplate, async (req, res) =>
 
 app.get('/users/:id', async (req, res) => {
     let user = db.prepare('SELECT * FROM user WHERE id=?').get(req.params.id);
-    if (user == null) return errors.sendError404(req, res);
+    let templates = db.prepare('SELECT * FROM template WHERE creator=? ORDER BY usage DESC').all(req.params.id);
+    if (user == null || templates.length === 0) return errors.sendError404(req, res);
 
     let data = {
         user: res.locals.user,
         profile: user,
-        templates: db.prepare('SELECT * FROM template WHERE creator=? ORDER BY usage DESC').all(req.params.id),
+        templates: templates,
     };
 
     res.render('user', data);
@@ -582,7 +583,7 @@ let map;
 
 function generateSitemap() {
     let templates = db.prepare('SELECT guild FROM template').all();
-    let users = db.prepare('SELECT id FROM user').all();
+    let users = db.prepare('SELECT id FROM user WHERE id IN (SELECT creator FROM template)').all();
 
     map = sitemap({
         http: 'https',
