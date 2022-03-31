@@ -427,7 +427,7 @@ app.post('/templates/new', checkLogin, async (req, res) => {
     if (template === false) return errors.sendError(req, res, 'Unknown server template.');
     if (template == null) return errors.sendError500(req, res);
 
-    if ((res.locals.user.admin === false && template.creator_id !== res.locals.user.id) {
+    if (res.locals.user.admin === false && template.creator_id !== res.locals.user.id) {
         return errors.sendError(req, res, 'You can only add your own template.');
     }
 
