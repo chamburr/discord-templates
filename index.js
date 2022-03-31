@@ -48,7 +48,7 @@ async function sleep(ms) {
 async function updateTemplates() {
     let templates = db.prepare('SELECT * FROM template').all();
 
-    if (templates.length === 0) await sleep(3000);
+    if (templates.length === 0) await sleep(15000);
 
     for (let element of templates) {
         let template = await api.fetchTemplate(element.id);
@@ -58,7 +58,7 @@ async function updateTemplates() {
                 db.prepare('DELETE FROM template WHERE id=?').run(element.id);
             }
 
-            await sleep(3000);
+            await sleep(15000);
             continue;
         }
 
@@ -72,47 +72,13 @@ async function updateTemplates() {
                 .run(template.name, template.description, template.usage_count, element.id);
         }
 
-        await sleep(3000);
+        await sleep(15000);
     }
 
     updateTemplates();
 }
 
-async function updateUsers() {
-    let users = db.prepare('SELECT * FROM user').all();
-
-    if (users.length === 0) await sleep(3000);
-
-    for (let element of users) {
-        let user = await api.fetchUser(element.id);
-
-        if (!user || user.username == null) {
-            if (user === false) {
-                db.prepare('DELETE FROM user WHERE id=?').run(element.id);
-            }
-
-            await sleep(3000);
-            continue;
-        }
-
-        if (element.username !== user.username ||
-            element.avatar !== user.avatar ||
-            element.discriminator !== user.discriminator) {
-
-            if (user.avatar == null) user.avatar = '';
-
-            db.prepare('UPDATE user SET username=?, avatar=?, discriminator=? WHERE id=?')
-                .run(user.username, user.avatar, user.discriminator, element.id);
-        }
-
-        await sleep(3000);
-    }
-
-    updateUsers();
-}
-
 updateTemplates();
-updateUsers();
 
 let oauth = new DiscordOauth2();
 
@@ -262,6 +228,8 @@ app.get('/callback', async (req, res) => {
 
     db.prepare('INSERT OR IGNORE INTO user VALUES (?, ?, ?, ?, ?)')
         .run(user.id, user.username, user.avatar, user.discriminator, Date.now().toString());
+    db.prepare('UPDATE user SET username=?, avatar=?, discriminator=? WHERE id=?')
+        .run(user.username, user.avatar, user.discriminator, user.id);
 
     let token = jwt.signToken(user.token);
 
