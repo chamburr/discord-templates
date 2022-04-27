@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+    <script async id="vd266316800" type="text/javascript" src="https://tags.viewdeos.com/discordtemplates/player-discordtemplates.js"></script>
+</head>
+
+<body>
+<%- include('partials/navbar', {user: user}) %>
+<div class="main-content">
+    <div class="d-table overflow-hidden w-100 py-4" style="height: 65vh;">
+        <div id="particles-js"></div>
+        <div class="d-table-cell align-middle">
+            <div class="container text-center text-md-left">
+                <h1>Welcome to <br class="d-md-none">Discord Templates!</h1>
+                <h2 class="h5 font-weight-normal">
+                    Discover a huge variety of Discord server templates for all purposes.
+                </h2>
+                <form class="form-inline d-block d-md-flex mt-4 needs-validation" method="get" action="/search"
+                      novalidate>
+                    <div class="form-group ml-0">
+                        <label for="search-name" class="sr-only">Name</label>
+                        <div class="input-group">
+                            <input name="q" type="text" class="form-control form-control-lg form-control-dark"
+                                   id="search-name"
+                                   placeholder="Search for templates..." required>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-dark btn-lg">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="mt-4">
+                    <p class="font-weight-bold text-white-50">Or browse by tags...</p>
+                    <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/community">Community</a>
+                    <a role="button"
+                       class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/gaming">Gaming</a>
+                    <a role="button"
+                       class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/roleplay">Roleplay</a>
+                    <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                       href="/tags/friends">Friends</a>
+                    <a role="button"
+                       class="btn btn-outline-success btn-sm btn-pill font-weight-bold mb-2"
+                       href="#tag-collapse" data-toggle="collapse"
+                       aria-expanded="false"
+                       aria-controls="tag-collapse">Show More</a>
+                    <div class="collapse" id="tag-collapse">
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/art">Art</a>
+                        <a role="button"
+                           class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/music">Music</a>
+                        <a role="button"
+                           class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/meme">Meme</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/economy">Economy</a>
+                        <a role="button"
+                           class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/coding">Coding</a>
+                        <a role="button"
+                           class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/learning">Learning</a>
+                        <a role="button" class="btn btn-outline-info btn-sm btn-pill font-weight-bold mb-2"
+                           href="/tags/support">Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <%- include('partials/ad', {name: 'placement-1'}) %>
+    <div class="container mt-3" style="padding: 20px 5%;">
+        <h3><img src="/icons/star.svg" alt="Star" class="icon"> Top Templates</h3>
+        <p>These templates are the most popular!</p>
+        <div class="row">
+            <% for (let element of top) { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
+            <% } %>
+        </div>
+        <%- include('partials/ad', {name: 'placement-2'}) %>
+    </div>
+    <hr>
+    <div class="container" style="padding: 20px 5%;">
+        <h3><img src="/icons/clock.svg" alt="Clock" class="icon"> New Templates</h3>
+        <p>These templates are new to the list!</p>
+        <div class="row">
+            <% for (let element of recent) { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
+            <% } %>
+        </div>
+        <%- include('partials/ad', {name: 'placement-3'}) %>
+    </div>
+    <hr>
+    <div class="container" style="padding: 20px 5%;">
+        <h3><img src="/icons/users.svg" alt="Users" class="icon"> Community</h3>
+        <p>These templates have the community tag.</p>
+        <div class="row">
+            <% for (let element of community) { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
+            <% } %>
+        </div>
+        <div class="text-center mt-3">
+            <a role="button" class="btn btn-primary" href="/tags/community">View More</a>
+        </div>
+        <%- include('partials/ad', {name: 'placement-4'}) %>
+    </div>
+    <hr>
+    <div class="container pb-0" style="padding: 20px 5%;">
+        <h3><img src="/icons/gamepad.svg" alt="Gamepad" class="icon"> Gaming</h3>
+        <p>These templates have the gaming tag.</p>
+        <div class="row">
+            <% for (let element of gaming) { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <%- include('partials/card', {template: element}) %>
+                </div>
+            <% } %>
+        </div>
+        <div class="text-center mt-3">
+            <a role="button" class="btn btn-primary" href="/tags/gaming">View More</a>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+</div>
+<div id="placement-video" style="height: 0; overflow: hidden;"></div>
+<script src="/assets/jquery.min.js"></script>
+<script src="/assets/bootstrap.min.js"></script>
+<script>
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.classList.add('was-validated');
+                }
+            }, false);
+        });
+    }, false);
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            $('#scroll-button').addClass('show');
+        } else {
+            $('#scroll-button').removeClass('show');
+        }
+    });
+
+    $(document).ready(function () {
+        $('#scroll-button').on('click', function (event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        });
+    });
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    if (window['nitroAds'] && window['nitroAds'].loaded) {
+        if ($('#consent-box')) {
+            $('#consent-box').css('display', window['__tcfapi'] ? '' : 'none')
+        }
+    } else {
+        document.addEventListener('nitroAds.loaded', function () {
+            if ($('#consent-box')) {
+                $('#consent-box').css('display', window['__tcfapi'] ? '' : 'none')
+            }
+        });
+    }
+
+    $('.ad').each(function () {
+        var sizes = [
+            [728, 90],
+            [970, 90],
+            [320, 50],
+        ];
+
+        if ($(this).data('size') == 'rectangle') {
+            sizes = [
+                [300, 600],
+                [300, 250],
+                [320, 50],
+            ];
+        }
+
+        window['nitroAds'].createAd($(this).attr('id'), {
+            format: 'display',
+            refreshLimit: 10,
+            refreshTime: 30,
+            report: {
+                enabled: true,
+                wording: 'Report Ad',
+                position: 'bottom-right'
+            },
+            sizes: sizes
+        });
+    })
+
+    window['nitroAds'].createAd('placement-anchor', {
+        format: 'anchor',
+        anchor: 'bottom'
+    });
+
+    window['nitroAds'].createAd('placement-interstitial', {
+        format: 'interstitial'
+    });
+</script>
+<script src="/assets/particles.min.js"></script>
+<script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 60,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                },
+                "image": {
+                    "src": "img/github.svg",
+                    "width": 100,
+                    "height": 100
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 3,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "window",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "grab"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 200,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+</script>
+</body>
+
+</html>
