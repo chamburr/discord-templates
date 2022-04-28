@@ -265,20 +265,6 @@ app.get('/', async (req, res) => {
     res.render('index', data);
 });
 
-app.get('/test', async (req, res) => {
-    let data = {
-        user: res.locals.user,
-        top: db.prepare('SELECT * FROM template ORDER BY usage DESC LIMIT 6').all(),
-        recent: db.prepare('SELECT * FROM template ORDER BY added DESC LIMIT 6').all(),
-        community: db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) ORDER BY RANDOM() DESC LIMIT 6')
-            .all('community', 'community'),
-        gaming: db.prepare('SELECT * FROM template WHERE (tag1=? OR tag2=?) ORDER BY RANDOM() DESC LIMIT 6')
-            .all('gaming', 'gaming'),
-    };
-
-    res.render('test', data);
-});
-
 app.get('/discord', async (req, res) => {
     res.redirect('https://discord.gg/HXHfYQB');
 });
@@ -634,7 +620,8 @@ app.get('/robots.txt', async (req, res) => {
 
 app.get('/ads.txt', async (req, res) => {
     let body = await request('https://api.nitropay.com/v1/ads-854.txt');
-    body += `\n\nviewdeos.com, 6268eb6ac8e4ca7c0137fe94, DIRECT
+    body += `\n\n# Viewdeos
+viewdeos.com, 6268eb6ac8e4ca7c0137fe94, DIRECT
 ad-generation.jp, 12474, RESELLER, 7f4ea9029ac04e53
 adapex.io, s1632, DIRECT
 adiiix.com, pub-AA7DA8849D8379630883367B8A7643DA, DIRECT
