@@ -1,4 +1,4 @@
-<div id="placement-video" style="height: 0; overflow: hidden;"></div>
+<div id="placement-video"></div>
 <script src="/assets/jquery.min.js"></script>
 <script src="/assets/bootstrap.min.js"></script>
 <script>
@@ -81,8 +81,11 @@
         format: 'interstitial'
     });
 
-    // window['nitroAds'].createAd('placement-video', {
-    //     format: 'video-ac',
-    //     mediaQuery: '(min-width: 768px)'
-    // });
+    window['nitroAds'].createAd('placement-video', {
+        format: 'video-nc',
+        mediaQuery: '(min-width: 768px)',
+        video: {
+            float: 'always'
+        }
+    });
 </script>
