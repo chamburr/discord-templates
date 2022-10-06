@@ -8,10 +8,10 @@ Check out the website at https://discordtemplates.me.
 
 Follow these steps to run the application.
 
-1. Install [Node.js](https://nodejs.org/en/download/).
-2. Install dependencies using `npm install`.
+1. Install [Node.js](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/getting-started/install).
+2. Install dependencies using `yarn install`.
 3. Fill in the configurations in config.json.
-3. Run `npm start` and go to http://localhost:8080. Success!
+3. Run `yarn start` and go to http://localhost:8080. Success!
 
 ## License
 
