@@ -1,5 +1,7 @@
 FROM node:18-alpine
 
+RUN apk add --no-cache make build-base python3
+
 WORKDIR /app
 
 COPY package.json yarn.lock ./
