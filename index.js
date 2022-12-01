@@ -13,7 +13,7 @@ const api = require('./utils/api.js');
 const errors = require('./utils/error_handler.js');
 const jwt = require('./utils/jwt.js');
 
-let db = new BetterSqlite3('data.db');
+let db = new BetterSqlite3(config.database);
 db.prepare(`CREATE TABLE IF NOT EXISTS user
     (
         id            text    NOT NULL PRIMARY KEY,
