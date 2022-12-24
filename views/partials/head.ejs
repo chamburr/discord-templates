@@ -24,16 +24,12 @@
 <link rel="stylesheet" href="/assets/bootstrap.min.css" type="text/css">
 <script async src="https://s.nitropay.com/ads-854.js" data-log-level="warn"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-129600306-4');
-
-    window['nitroAds'] = window['nitroAds'] || {
+    window.nitroAds = window.nitroAds || {
         createAd: function() {
             window.nitroAds.queue.push(['createAd', arguments]);
+        },
+        addUserToken: function() {
+            window.nitroAds.queue.push(['addUserToken', arguments]);
         },
         queue: []
     };
