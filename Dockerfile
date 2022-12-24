@@ -9,9 +9,9 @@ COPY package.json yarn.lock ./
 RUN yarn --frozen-lockfile --prod
 
 COPY index.js ./
-COPY static ./
-COPY utils ./
-COPY views ./
+COPY static ./static
+COPY utils ./utils
+COPY views ./views
 
 EXPOSE 8080
 
