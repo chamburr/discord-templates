@@ -45,36 +45,67 @@
     }
 
     $('.ad').each(function () {
-        var sizes = [
-            [728, 90],
-            [970, 90],
-            [320, 50],
-        ];
-
         if ($(this).data('size') == 'rectangle') {
-            sizes = [
-                [300, 600],
-                [300, 250],
-                [320, 50],
-            ];
+            window['nitroAds'].createAd($(this).attr('id'), {
+                format: 'display',
+                refreshLimit: 20,
+                refreshTime: 30,
+                mediaQuery: '(min-width: 768px)',
+                report: {
+                    enabled: true,
+                    wording: 'Report Ad',
+                    position: 'bottom-right'
+                },
+                sizes: [
+                    [300, 600],
+                    [300, 250]
+                ]
+            });
+            window['nitroAds'].createAd($(this).attr('id'), {
+                format: 'display',
+                refreshLimit: 20,
+                refreshTime: 30,
+                mediaQuery: '(min-width: 320px) and (max-width: 767px)',
+                report: {
+                    enabled: true,
+                    wording: 'Report Ad',
+                    position: 'bottom-right'
+                },
+                sizes: [
+                    [320, 100],
+                    [320, 50]
+                ]
+            });
+        } else {
+            window['nitroAds'].createAd($(this).attr('id'), {
+                format: 'display',
+                refreshLimit: 20,
+                refreshTime: 30,
+                report: {
+                    enabled: true,
+                    wording: 'Report Ad',
+                    position: 'bottom-right'
+                },
+                sizes: [
+                    [728, 90],
+                    [970, 90],
+                    [320, 50]
+                ]
+            });
         }
-
-        window['nitroAds'].createAd($(this).attr('id'), {
-            format: 'display',
-            refreshLimit: 10,
-            refreshTime: 30,
-            report: {
-                enabled: true,
-                wording: 'Report Ad',
-                position: 'bottom-right'
-            },
-            sizes: sizes
-        });
     })
 
     window['nitroAds'].createAd('placement-anchor', {
         format: 'anchor',
-        anchor: 'bottom'
+        anchor: 'bottom',
+        refreshLimit: 20,
+        refreshTime: 30,
+        report: {
+            enabled: true,
+            wording: 'Report Ad',
+            position: 'bottom-right'
+        },
+        mediaQuery: '(min-width: 0px)'
     });
 
     window['nitroAds'].createAd('placement-interstitial', {
