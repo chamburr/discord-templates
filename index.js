@@ -439,7 +439,8 @@ app.get('/templates/:id', checkTemplate, async (req, res) => {
     let data = {
         user: res.locals.user,
         template: res.locals.template,
-        redirectUri: await getOauthUri(['identify', 'guilds.join'], req.originalUrl.split()[0] + '/use')
+        redirectUri1: await getOauthUri(['identify', 'guilds.join'], req.originalUrl.split()[0] + '/use'),
+        redirectUri2: await getOauthUri(['identify'], req.originalUrl.split()[0] + '/use')
     };
 
     res.render('template', data);
