@@ -265,6 +265,10 @@ app.get('/', async (req, res) => {
     res.render('index', data);
 });
 
+app.get('/github', async (req, res) => {
+    res.redirect('https://github.com/chamburr/discord-templates');
+});
+
 app.get('/discord', async (req, res) => {
     res.redirect('https://discord.gg/HXHfYQB');
 });
