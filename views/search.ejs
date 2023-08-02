@@ -25,7 +25,6 @@
                 </div>
             </div>
         </form>
-        <%- include('partials/ad', {name: 'placement-1'}) %>
         <div class="row mt-4">
             <% if (templates.length === 0) { %>
                 <div class="col text-center">
@@ -37,11 +36,6 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <%- include('partials/card', {template: element}) %>
                     </div>
-                    <% if (index === 5) { %>
-                        <div class="col-12 mb-4">
-                            <%- include('partials/ad', {name: 'placement-2'}) %>
-                        </div>
-                    <% } %>
                 <% } %>
             <% } %>
         </div>
