@@ -624,7 +624,7 @@ app.get('/robots.txt', async (req, res) => {
 });
 
 app.get('/ads.txt', async (req, res) => {
-    let body = await request('https://api.nitropay.com/v1/ads-854.txt');
+    let body = await request('https://ads.adthrive.com/sites/64b982b704832e03eb93ff94/ads.txt');
 
     res.header('Content-Type', 'text/plain');
     res.send(body);
