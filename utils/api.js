@@ -30,9 +30,10 @@ async function fetchTemplate(id) {
     try {
         return await request({
             method: 'GET',
-            uri: `https://discordapp.com/api/v9/guilds/templates/${id}`,
+            uri: `https://discord${Math.random() >= 0.5 ? 'app' : ''}.com/api/v9/guilds/templates/${id}`,
             headers: {
-                'User-Agent': 'DiscordBot (custom, 1.0.0)'
+                'User-Agent': 'DiscordBot (custom, 1.0.0)',
+                ...(Math.random() >= 0.5 && { 'Authorization': `Bot ${config.botToken}` })
             },
             json: true
         });
