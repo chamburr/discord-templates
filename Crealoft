@@ -1,0 +1,30 @@
+{
+  "name": "Crealoft - Studio Créatif",
+  "icon": null,
+  "roles": [
+    { "name": "Admin", "permissions": ["MANAGE_CHANNELS", "MANAGE_ROLES", "VIEW_AUDIT_LOG"] },
+    { "name": "Client", "permissions": ["VIEW_CHANNEL", "SEND_MESSAGES"] }
+  ],
+  "channels": [
+    { "name": "BIENVENUE", "type": "category" },
+    { "name": "bienvenue", "type": "text", "parent": "BIENVENUE", "topic": "Accueil des nouveaux, règles & info générale" },
+    { "name": "comment-commander", "type": "text", "parent": "BIENVENUE", "topic": "Étapes pour lancer ta commande" },
+    { "name": "tarifs", "type": "text", "parent": "BIENVENUE", "topic": "Prix et services proposés" },
+    { "name": "exemples-travaux", "type": "text", "parent": "BIENVENUE", "topic": "Voir mes logos, sites, montages" },
+    { "name": "avis-clients", "type": "text", "parent": "BIENVENUE", "topic": "Retours et témoignages" },
+    { "name": "COMMANDES", "type": "category" },
+    { "name": "poser-une-commande", "type": "text", "parent": "COMMANDES", "topic": "Ouvre un ticket pour commander" },
+    { "name": "suivi-commande", "type": "text", "parent": "COMMANDES", "topic": "Informations de progression" },
+    { "name": "paiement", "type": "text", "parent": "COMMANDES", "topic": "Lien de paiement sécurisé" },
+    { "name": "CLIENTS", "type": "category" }
+  ],
+  "permissions": [
+    {
+      "id": "bienvenue",
+      "permissions": {
+        "Admin": ["MANAGE_MESSAGES", "MANAGE_CHANNELS"],
+        "Client": ["VIEW_CHANNEL", "SEND_MESSAGES"]
+      }
+    }
+  ]
+}
