@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
-    <%- include('partials/head', {title: profile.username + '#' + profile.discriminator, description: '',
-    image: profile.avatar == null ? 'https://cdn.discordapp.com/embed/avatars/0.png' :
+    <%- include('partials/head', {title: profile.discriminator === '0' ? profile.username :
+    profile.username + '#' + profile.discriminator, description: '', image: profile.avatar == null ?
+    'https://cdn.discordapp.com/embed/avatars/0.png' :
     `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=256`}) %>
 </head>
 
@@ -24,7 +25,13 @@
                              class="card-img rounded-circle" style="height: 220px; width: 220px;" alt="Avatar">
                     </div>
                     <div class="col-12 col-lg-7 pl-4 my-auto text-center text-lg-left pt-4 pt-lg-0">
-                        <p class="h3 card-title"><%= profile.username %>#<%= profile.discriminator %></p>
+                        <p class="h3 card-title">
+                            <% if (profile.discriminator === '0') { %>
+                                <%= profile.username %>
+                            <% } else { %>
+                                <%= profile.username %>#<%= profile.discriminator %>
+                            <% } %>
+                        </p>
                         <div class="h4">
                             <span class="badge badge-primary font-weight-normal">
                                 <%= templates.length %> templates listed

@@ -219,7 +219,7 @@ app.get('/callback', async (req, res) => {
         embeds: [{
             title: 'User Logged In',
             color: 0x00FF00,
-            description: `${user.username}#${user.discriminator} (${user.id})`,
+            description: `${user.username} (${user.id})`,
             timestamp: Date.now()
         }]
     });
@@ -243,7 +243,7 @@ app.get('/logout', checkLogin, async (req, res) => {
         embeds: [{
             title: 'User Logged Out',
             color: 0xFF0000,
-            description: `${res.locals.user.username}#${res.locals.user.discriminator} (${res.locals.user.id})`,
+            description: `${res.locals.user.username} (${res.locals.user.id})`,
             timestamp: Date.now()
         }]
     });
@@ -416,7 +416,7 @@ app.post('/templates/new', checkLogin, async (req, res) => {
                 },
                 {
                     name: 'User',
-                    value: `${res.locals.user.username}#${res.locals.user.discriminator} (${res.locals.user.id})`,
+                    value: `${res.locals.user.username} (${res.locals.user.id})`,
                     inline: false
                 }
             ],
@@ -488,7 +488,7 @@ app.post('/templates/:id/edit', checkLogin, checkTemplate, async (req, res) => {
                 },
                 {
                     name: 'User',
-                    value: `${res.locals.user.username}#${res.locals.user.discriminator} (${res.locals.user.id})`,
+                    value: `${res.locals.user.username} (${res.locals.user.id})`,
                     inline: false
                 }
             ],
@@ -525,7 +525,7 @@ app.post('/templates/:id/delete', checkLogin, checkTemplate, async (req, res) =>
                 },
                 {
                     name: 'User',
-                    value: `${res.locals.user.username}#${res.locals.user.discriminator} (${res.locals.user.id})`,
+                    value: `${res.locals.user.username} (${res.locals.user.id})`,
                     inline: false
                 }
             ],

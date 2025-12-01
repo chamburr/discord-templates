@@ -34,7 +34,11 @@
                                  template.creator.avatar %>.png?size=64"
                                  class="card-img rounded-circle" style="height: 21px; width: 21px;" alt="Avatar">
                             <span class="my-auto align-middle pr-2">
-                                Creator: <%= template.creator.username %>#<%= template.creator.discriminator %>
+                                <% if (template.creator.discriminator === '0') { %>
+                                    Creator: <%= template.creator.username %>
+                                <% } else { %>
+                                    Creator: <%= template.creator.username %>#<%= template.creator.discriminator %>
+                                <% } %>
                             </span>
                         </a>
                     </p>
@@ -207,7 +211,7 @@
                         <div class="h4">
                             <p class="h4 card-title mb-1 mt-4 mt-md-0">Roles</p>
                             <% for (let element of template.serialized_source_guild.roles) { %>
-                                <% let color = ("000000" + element.color.toString(16)).slice(-6); %>
+                                <% let color = ('000000' + element.color.toString(16)).slice(-6); %>
                                 <% let originalColor = color; %>
                                 <% if (color === '000000') color = 'd3d3d3'; %>
                                 <button type="button" class="btn btn-sm btn-pill text-white py-0 pl-1 pr-2 my-1"
